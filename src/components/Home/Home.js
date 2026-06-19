@@ -2,9 +2,9 @@ import React from "react";
 import "./Home.css";
 import Typewriter from "typewriter-effect";
 import HeroSlider, { Slide } from "hero-slider";
-import Agric1 from "../../img/Agric1.jpg";
-import Agric2 from "../../img/Agric2.jpg";
-import Agric3 from "../../img/Agric3.jpg";
+import agric1 from "../../img/agric1.jpg";
+import agric2 from "../../img/agric2.jpg";
+import agric3 from "../../img/agric3.jpg";
 import { Link } from "react-scroll";
 
 
@@ -72,7 +72,7 @@ function Home() {
           <div className="carousel-inner">
             <div className="carousel-item active" data-bs-interval="5000">
               <img
-                src={Agric1}
+                src={agric1}
                 className="d-block w-100"
                 alt="Développement agricole et territorial"
               />
@@ -80,7 +80,7 @@ function Home() {
 
             <div className="carousel-item" data-bs-interval="2000">
               <img
-                src={Agric2}
+                src={agric2}
                 className="d-block w-100"
                 alt="Agriculture et développement rural"
               />
@@ -88,7 +88,7 @@ function Home() {
 
             <div className="carousel-item">
               <img
-                src={Agric3}
+                src={agric3}
                 className="d-block w-100"
                 alt="Environnement et ressources naturelles"
               />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-scroll";
-import img from "../../img/Logo2.png";
+import img from "../../img/logo2.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
