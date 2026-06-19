@@ -3,7 +3,7 @@ import "./navbarmobile.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-scroll";
-import img from "../../img/ameigr blanc.png";
+import img from "../../img/logo2.png";
 
 function NavbarMobile() {
   const [open, setOpen] = useState(false);
