@@ -1,114 +1,70 @@
-import React,{useState} from "react";
-import "./Navbar.css"
-import {Link} from 'react-scroll';
-import $ from 'jquery';
+import React, { useEffect, useState } from "react";
+import "./Navbar.css";
+import { Link } from "react-scroll";
+import img from "../../img/Logo2.png";
 
-const Navbar = ()=>{
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 150) {
-          document.querySelector('#navbar').style.opacity = 0.8;
-        } else {
-          document.querySelector('#navbar').style.opacity = 1;
-        }
-      });
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-      $(window).scroll(function(){
-        if ($(window).scrollTop()){
-            $('nav').addClass('black')
-        }else {
-            $('nav').removeClass('black')
-        }
-      })
-    
-    
-    return(
-        <nav className="navbar-main " id="navbar" >
-            
-            <img src="./ameigr\ blanc.png" alt="Ameigr" class="logo"/>
-            <ul>
-                <li className="nav-item">
-                    <Link to='home' spy={true} smooth={true} offset={-100} duration={100}>
-                        Home
-                    </Link>
-                </li>  
-                
-                <li className="nav-item">
-                <Link to='about' spy={true} smooth={true} offset={-100} duration={100}>
-                    About
-                </Link>
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
 
-                </li>
-                <li className="nav-item">
-                    <Link to='service' spy={true} smooth={true} offset={-100} duration={100}>
-                    
-                        Service
-                    
-                    </Link>
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
 
-                </li>
-                
-                <li className="nav-item">
-                <Link to='career' spy={true} smooth={true} offset={-100} duration={100}>
-                    
-                    Career
-                    
-                </Link>
-                </li>
-                <li className="nav-item">
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-                <Link to='video' spy={true} smooth={true} offset={-100} duration={100}>
-                    
-                    Video
-                </Link>
-                </li>
-                <li className="nav-item">
+  return (
+    <nav className={isScrolled ? "navbar-main black" : "navbar-main"} id="navbar">
+      <Link to="home" spy smooth offset={-100} duration={300}>
+        <img src={img} alt="Ameigr" className="logo" />
+      </Link>
 
-                <Link to='team-mmbre' spy={true} smooth={true} offset={-100} duration={100}>
-                    
-                    Team
-                
-                </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='Testimonial' spy={true} smooth={true} offset={-70} duration={100}>
-                        Testimonial
-                    </Link>
-                </li> 
-                
-                <li className="nav-item">
+      <ul>
+        <li className="nav-item">
+          <Link to="home" spy smooth offset={-100} duration={300}>
+            Carrières
+          </Link>
+        </li>
 
-                <Link to='contact' spy={true} smooth={true} offset={-110} duration={100}>
-                    
-                    Contact
-                </Link>
-  
-                </li>
-                <li className="nav-item">
+        <li className="nav-item">
+          <Link to="about" spy smooth offset={-100} duration={300}>
+            À propos de nous
+          </Link>
+        </li>
 
-                <Link to='subs' spy={true} smooth={true} offset={200} duration={100}>
-                    
-                    Subscription
-                    
-                </Link>
-                </li>
-                
+        <li className="nav-item">
+          <Link to="sectors" spy smooth offset={0} duration={300}>
+            Secteurs
+          </Link>
+        </li>
 
-                
+        <li className="nav-item">
+          <Link to="references" spy smooth offset={-100} duration={300}>
+            Références
+          </Link>
+        </li>
 
-                
+        {/* <li className="nav-item">
+          <Link to="sponsors" spy smooth offset={-100} duration={300}>
+            Actualités
+          </Link>
+        </li> */}
 
-                
-                
-
-                
-
-                
-
-                
-            </ul>
-        </nav>
         
-    )
-}
+        <li className="nav-item">
+          <Link to="contact" spy smooth offset={0} duration={300}>
+            Contact
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

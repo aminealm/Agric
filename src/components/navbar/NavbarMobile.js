@@ -1,84 +1,66 @@
-import React, { useState } from 'react'
-import './navbarmobile.css'
-import {GiHamburgerMenu} from 'react-icons/gi'
-import {Link} from 'react-scroll';
+import React, { useState } from "react";
+import "./navbarmobile.css";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
+import { Link } from "react-scroll";
+import img from "../../img/ameigr blanc.png";
 
 function NavbarMobile() {
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleNavbaropen = () => {
-    setOpen(!open)
-  }
-
+  const closeNavbar = () => {
+    setOpen(false);
+  };
 
   return (
-    <div className='responsive-mobile-view'>
-        <div className='container-fluid mobile-view-header'>
-            <p><GiHamburgerMenu size={25} onClick={handleNavbaropen}/></p>
+    <div className="responsive-mobile-view">
+      <div className="mobile-view-header">
+        <Link to="home" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+          <img src={img} alt="Agriconsulting Maroc" className="mobile-logo" />
+        </Link>
+
+        <button className="mobile-menu-btn" onClick={() => setOpen(!open)}>
+          {open ? <IoClose size={30} /> : <GiHamburgerMenu size={28} />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="mobile-nav">
+          <ul>
+            <li className="nav-item">
+              <Link to="home" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+                Carrières
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="about" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+                À propos de nous
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="sectors" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+                Secteurs
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="references" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+                Références
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="contact" spy smooth offset={80} duration={300} onClick={closeNavbar}>
+                Contact
+              </Link>
+            </li>
+          </ul>
         </div>
-
-        {open? (<div className='mobile-nav'>
-        <ul>
-                <li className="nav-item">
-                    <Link to='home' spy={true} smooth={true} offset={-100} duration={100}>
-                        Home
-                    </Link>
-                </li>  
-                
-                <li className="nav-item">
-                <Link to='about' spy={true} smooth={true} offset={-100} duration={100}>
-                    About
-                </Link>
-
-                </li>
-                <li className="nav-item">
-                    <Link to='service' spy={true} smooth={true} offset={-100} duration={100}>
-                    
-                        Service
-                    
-                    </Link>
-
-                </li>
-                
-
-                <Link to='career' spy={true} smooth={true} offset={-100} duration={100}>
-                    <li>
-                    Career
-                    </li>
-                </Link>
-                <Link to='' spy={true} smooth={true} offset={100} duration={100}>
-                    <li>
-                    Video
-                    </li>
-                </Link>
-                <Link to='team-mmbre' spy={true} smooth={true} offset={-100} duration={100}>
-                    <li>
-                    Team
-                    </li>
-                </Link>
-                <li className="nav-item">
-                    <Link to='Testimonial' spy={true} smooth={true} offset={-70} duration={100}>
-                        Testimonial
-                    </Link>
-                </li> 
-                
-                
-                <Link to='' spy={true} smooth={true} offset={100} duration={100}>
-                    <li>
-                    Contact
-                    </li>
-                </Link>
-                <Link to='subs' spy={true} smooth={true} offset={-70} duration={100}>
-                    <li>
-                    Subscription
-                    </li>
-                </Link>
-                
-            </ul>
-        </div>):null }
-        
+      )}
     </div>
-  )
+  );
 }
 
-export default NavbarMobile
+export default NavbarMobile;

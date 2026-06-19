@@ -1,53 +1,106 @@
 .navbar-main {
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    top: 0;
-    text-align: center;
-    justify-content: right;
-    position: fixed;
-    z-index: 2;
-    transition: 1s;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  padding-left: 10%;
+  background-color: transparent;
+  text-align: center;
+  transition: 0.4s ease;
 }
 
+/* Navbar background after scroll */
+.black {
+  background-color: rgba(11, 93, 50, 0.94);
+  transition: 0.4s ease;
+}
+
+/* Logo */
 .logo {
-    width: 100px;
-    height: 100px;
-    z-index: 2;
-    margin-top: 10px;
-  }
-.black{
-    background-color: rgba(40, 58, 90, 0.9);
-    transition: 1s;
+  width: auto;
+  height: 60px;
+  z-index: 2;
+  margin-top: 10px;
+  object-fit: contain;
 }
 
-.navbar-main ul  {
-    display: flex;
-    margin-right: 10%;
-    transition: 1s;
+/* Navbar links container */
+.navbar-main ul {
+  display: flex;
+  align-items: center;
+  margin: 0 10% 0 0;
+  padding: 0;
 }
 
+/* Navbar links */
 .navbar-main ul li {
-    padding-top: 0.7rem;
-    margin-right: 50px;
-    list-style-type: none;
-    color: white;
-    cursor: pointer;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding-top: 0.7rem;
+  margin-right: 50px;
+  list-style-type: none;
+
+  color: var(--white);
+  cursor: pointer;
+
+  font-family: "Jost", "Open Sans", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-.navbar-main ul li:hover{
-    color: #47b2e4;
-    
+/* Hover effect */
+.navbar-main ul li:hover {
+  color: var(--green-soft);
 }
 
+/* Active link */
 .nav-item .active {
-    color:#47b2e4;
+  color: var(--white);
+  font-weight: 700;
 }
 
-@media (max-width:1000px) {
-    .navbar-main{
-        display: none;
-    }
+/* Underline effect */
+.navbar-main ul li::after {
+  content: "";
+  width: 0;
+  height: 2px;
+
+  background-color: var(--white);
+
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+
+  transition: width 0.3s ease;
+}
+
+.navbar-main ul li:hover::after {
+  width: 100%;
+}
+
+/* Active underline */
+.navbar-main ul li:has(.active)::after {
+  width: 100%;
+}
+
+/* Any image inside navbar */
+.navbar-main img {
+  width: auto;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Hide desktop navbar on mobile/tablet */
+@media (max-width: 1120px) {
+  .navbar-main {
+    display: none;
+  }
 }

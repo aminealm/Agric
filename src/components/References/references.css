@@ -1,0 +1,389 @@
+.references-controls button:disabled {
+  background: var(--gray-border);
+  color: var(--white);
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+  transform: none;
+}
+
+.references-controls button:disabled:hover {
+  background: var(--gray-border);
+  transform: none;
+}
+.references-section {
+  width: 100%;
+  min-height: 90vh;
+  padding: 100px 0;
+  background: var(--white);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.references-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.references-header h2 {
+  font-family: "Jost", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--green-forest);
+  margin: 0 0 12px;
+}
+
+/* Same tiny line as Contact */
+.references-line {
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: var(--green-accent);
+  margin: 0 auto;
+  border-radius: 999px;
+}
+
+.references-carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.references-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.55s ease;
+  transform: translateX(calc(-1 * var(--slide-index) * (33.3333% + 24px)));
+}
+
+.reference-card {
+  position: relative;
+  flex: 0 0 calc(33.3333% - 16px);
+  height: 285px;
+  background: var(--white);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(13, 43, 34, 0.14);
+  transition: box-shadow 0.35s ease;
+}
+
+.reference-card:hover {
+  background: var(--white);
+  transform: none;
+  box-shadow: inset 0 0 0 1px rgba(13, 43, 34, 0.14);
+}
+
+.reference-card-content {
+  height: 100%;
+  padding: 30px 32px 64px;
+  position: relative;
+  z-index: 3;
+}
+
+.reference-card h3 {
+  font-family: "Jost", sans-serif;
+  font-size: 24px;
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--green-forest);
+  margin: 0;
+  max-width: 98%;
+  transition: color 0.35s ease;
+}
+
+.reference-card:hover h3 {
+  color: var(--green-dark);
+}
+
+.reference-bottom {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 0;
+  height: 64px;
+  border-top: 1px solid rgba(13, 43, 34, 0.12);
+  padding-top: 0;
+  z-index: 6;
+
+  display: flex;
+  align-items: center;
+}
+
+.reference-meta {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.reference-card:hover .reference-meta {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.reference-meta div {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 250px;
+}
+
+.meta-icon {
+  color: var(--green-accent);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.reference-meta strong {
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--green-forest);
+}
+
+.reference-more {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+  border: none;
+  background: var(--green-accent);
+  color: var(--white);
+  padding: 0 32px;
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+  transform: translateY(100%);
+  transition: transform 0.35s ease, background 0.35s ease;
+  z-index: 7;
+
+  display: flex;
+  align-items: center;
+}
+
+.reference-card:hover .reference-more {
+  transform: translateY(0);
+}
+
+.reference-more:hover {
+  background: var(--green-dark);
+}
+
+.references-actions {
+  margin-top: 38px;
+  display: flex;
+  justify-content: center;
+}
+
+.references-all-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 24px;
+  background: var(--green-accent-soft);
+  color: var(--green-forest);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.references-all-btn:hover {
+  background: var(--green-accent);
+  color: var(--white);
+}
+
+.references-controls {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.references-controls button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--green-forest);
+  color: var(--white);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.references-controls button:hover {
+  background: var(--green-accent);
+}
+
+/* Tablet + small laptop */
+@media (max-width: 1100px) {
+  .references-carousel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 0 0 36px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: none;
+  }
+
+  .references-carousel:active {
+    cursor: grabbing;
+  }
+
+  .references-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .references-track {
+    transform: none !important;
+    width: max-content;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    transition: none;
+  }
+
+  .reference-card {
+    flex: 0 0 62vw;
+    height: 310px;
+    scroll-snap-align: start;
+  }
+
+  .reference-card h3 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .reference-bottom {
+    bottom: 0;
+    height: 64px;
+  }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .references-section {
+    min-height: 100vh;
+    padding: 80px 0;
+    justify-content: center;
+  }
+
+  .references-header {
+    text-align: left;
+    margin-bottom: 38px;
+    padding: 0 26px;
+  }
+
+  .references-header h2 {
+    font-size: 34px;
+    text-transform: none;
+    margin-bottom: 0;
+  }
+
+  .references-line {
+    display: none;
+  }
+
+  .references-carousel {
+    padding: 0 0 0 26px;
+  }
+
+  .references-track {
+    gap: 18px;
+  }
+
+  .reference-card {
+    flex: 0 0 88vw;
+    height: 330px;
+  }
+
+  .reference-card:hover {
+    background: var(--white);
+    transform: none;
+    box-shadow: inset 0 0 0 1px rgba(13, 43, 34, 0.14);
+  }
+
+  .reference-card-content {
+    padding: 28px 24px 70px;
+  }
+
+  .reference-card h3 {
+    font-size: 20px;
+    line-height: 1.28;
+  }
+
+  .reference-card:hover h3 {
+    color: var(--green-forest);
+  }
+
+  .reference-bottom {
+    left: 24px;
+    right: 24px;
+    bottom: 0;
+    height: 70px;
+    border-top: 1px solid rgba(13, 43, 34, 0.12);
+    padding-top: 0;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .reference-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .reference-meta div:first-child {
+    max-width: 65%;
+  }
+
+  .reference-meta div:last-child {
+    max-width: 30%;
+  }
+
+  .reference-card:hover .reference-meta {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reference-more {
+    display: none;
+  }
+
+  .references-actions {
+    margin-top: 38px;
+    justify-content: flex-start;
+    padding: 0 26px;
+  }
+
+  .references-controls {
+    display: none;
+  }
+}
+
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .reference-card {
+    flex: 0 0 90vw;
+    height: 350px;
+  }
+
+  .reference-card h3 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .reference-meta strong {
+    font-size: 13px;
+  }
+}

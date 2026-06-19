@@ -1,5 +1,6 @@
 {
   "name": "front",
+  "homepage": "http://association.ameigr.ma/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,12 +11,16 @@
     "jquery": "^3.6.1",
     "ng-image-slider": "^6.1.0",
     "react": "^18.2.0",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-image-gallery": "^1.2.11",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.8",
     "react-scroll-to-top": "^3.0.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "typewriter-effect": "^2.19.0",
     "web-vitals": "^2.1.4"
   },

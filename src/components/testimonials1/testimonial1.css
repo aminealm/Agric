@@ -1,0 +1,33 @@
+.sponsor {
+    margin-top: 1.5rem;
+    padding-left: 5%;
+    overflow: hidden;
+}
+
+.sponsor-event-card{
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    text-align: center;
+}
+.sponsor-event-card img{
+    height: 90px;
+    width: 150px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 7px 3px 21px -11px rgba(0,0,0,0.69);
+    -webkit-box-shadow: 7px 3px 21px -11px rgba(0,0,0,0.69);
+    -moz-box-shadow: 7px 3px 21px -11px rgba(0,0,0,0.69);
+    cursor: pointer;
+    transition-duration: 1s ;
+}
+
+.sponsor-event-card img:hover{
+    box-shadow: -8px 3px 21px -11px rgba(0,0,0,0.69);
+    -webkit-box-shadow: -8px 3px 21px -11px rgba(0,0,0,0.69);
+    -moz-box-shadow: -8px 3px 21px -11px rgba(0,0,0,0.69);
+        transition-duration: 1s ;
+    
+}
+

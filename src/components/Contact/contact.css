@@ -1,0 +1,379 @@
+.contact-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 0;
+  background:
+    radial-gradient(circle at top left, rgba(24, 184, 90, 0.14), transparent 38%),
+    linear-gradient(180deg, var(--green-soft) 0%, var(--green-light) 100%);
+  display: flex;
+  align-items: center;
+}
+.contact-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.contact-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.contact-title h2 {
+  font-family: "Jost", sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--green-deep);
+  margin: 0 0 12px;
+}
+
+.contact-title span {
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: var(--green-main);
+  margin: 0 auto;
+  border-radius: 999px;
+}
+
+.contact-card {
+  width: 100%;
+  min-height: 600px;
+  background: var(--white);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(31, 41, 51, 0.14);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+.contact-info-panel {
+  position: relative;
+  padding: 58px 52px;
+  background:
+    linear-gradient(145deg, rgba(11, 93, 50, 0.96), rgba(15, 143, 69, 0.96)),
+    radial-gradient(circle at top right, rgba(24, 184, 90, 0.45), transparent 40%);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.contact-info-panel::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  right: -90px;
+  top: -80px;
+}
+
+.contact-info-panel::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  left: -70px;
+  bottom: -70px;
+}
+
+.contact-small-title {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--green-soft);
+  font-family: "Jost", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.contact-info-panel h3 {
+  position: relative;
+  z-index: 2;
+  font-family: "Jost", sans-serif;
+  font-size: 40px;
+  line-height: 1.12;
+  font-weight: 800;
+  margin: 0 0 18px;
+  color: var(--white);
+}
+
+.contact-description {
+  position: relative;
+  z-index: 2;
+  max-width: 410px;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 38px;
+}
+
+.contact-details {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-icon {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.13);
+  color: var(--green-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: 0.3s ease;
+}
+
+.contact-detail:hover .contact-icon {
+  background: var(--green-main);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.contact-detail h4 {
+  font-family: "Jost", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--white);
+  margin: 0 0 5px;
+}
+
+.contact-detail p {
+  font-family: "Jost", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.76);
+  margin: 0;
+}
+
+.contact-email-btn {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 360px;
+  height: 58px;
+  margin-top: 42px;
+  border-radius: 999px;
+  background: var(--green-main);
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  transition: 0.3s ease;
+}
+
+.contact-email-btn:hover {
+  background: var(--white);
+  color: var(--green-deep);
+  transform: translateY(-3px);
+}
+
+.contact-arrow {
+  font-size: 13px;
+  transition: transform 0.3s ease;
+}
+
+.contact-email-btn:hover .contact-arrow {
+  transform: translateX(4px);
+}
+
+.contact-map-panel {
+  position: relative;
+  min-height: 600px;
+  background: var(--gray-soft);
+}
+
+.contact-map-panel iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  filter: grayscale(12%) saturate(0.92);
+}
+
+.map-floating-card {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 45px rgba(31, 41, 51, 0.18);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.map-floating-card strong {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--green-deep);
+}
+
+.map-floating-card span {
+  font-family: "Jost", sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+  .contact-section {
+    padding: 90px 0;
+  }
+
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-panel {
+    padding: 48px 42px;
+  }
+
+  .contact-map-panel,
+  .contact-map-panel iframe {
+    min-height: 420px;
+  }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .contact-section {
+    padding: 80px 0;
+  }
+
+  .contact-container {
+    padding: 0 22px;
+  }
+
+  .contact-title {
+    text-align: left;
+    margin-bottom: 38px;
+  }
+
+  .contact-title h2 {
+    font-size: 34px;
+    text-transform: none;
+  }
+
+  .contact-title span {
+    display: none;
+  }
+
+  .contact-card {
+    border-radius: 22px;
+  }
+
+  .contact-info-panel {
+    padding: 36px 26px;
+  }
+
+  .contact-info-panel h3 {
+    font-size: 31px;
+  }
+
+  .contact-description {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .contact-details {
+    gap: 22px;
+  }
+
+  .contact-detail {
+    gap: 14px;
+  }
+
+  .contact-icon {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 16px;
+  }
+
+  .contact-detail h4 {
+    font-size: 16px;
+  }
+
+  .contact-detail p {
+    font-size: 13px;
+  }
+
+  .contact-email-btn {
+    max-width: none;
+    height: 54px;
+    margin-top: 34px;
+    font-size: 15px;
+  }
+
+  .contact-map-panel,
+  .contact-map-panel iframe {
+    min-height: 320px;
+  }
+
+  .map-floating-card {
+    left: 18px;
+    bottom: 18px;
+    padding: 14px 16px;
+    border-radius: 15px;
+  }
+
+  .map-floating-card strong {
+    font-size: 14px;
+  }
+
+  .map-floating-card span {
+    font-size: 13px;
+  }
+}
+
+/* Small phone */
+@media (max-width: 420px) {
+  .contact-container {
+    padding: 0 16px;
+  }
+
+  .contact-info-panel {
+    padding: 32px 22px;
+  }
+
+  .contact-info-panel h3 {
+    font-size: 28px;
+  }
+
+  .contact-small-title {
+    font-size: 12px;
+  }
+}
