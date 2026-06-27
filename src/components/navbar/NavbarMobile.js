@@ -2,24 +2,86 @@ import React, { useState } from "react";
 import "./navbarmobile.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-scroll";
+import { useLocation, useNavigate } from "react-router-dom";
 import img from "../../img/logo2.png";
 
 function NavbarMobile() {
   const [open, setOpen] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const closeNavbar = () => {
     setOpen(false);
+  };
+
+  const scrollToSection = (sectionId, offset = -80) => {
+    closeNavbar();
+
+    if (location.pathname === "/") {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        const top =
+          section.getBoundingClientRect().top + window.pageYOffset + offset;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth",
+        });
+      }
+
+      return;
+    }
+
+    navigate("/", {
+      state: {
+        scrollTo: sectionId,
+        offset,
+      },
+    });
+  };
+
+  const goToReferences = () => {
+    closeNavbar();
+
+    if (location.pathname === "/references") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      return;
+    }
+
+    navigate("/references");
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    }, 0);
   };
 
   return (
     <div className="responsive-mobile-view">
       <div className="mobile-view-header">
-        <Link to="home" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+        <button
+          type="button"
+          className="mobile-logo-btn"
+          onClick={() => scrollToSection("home", -80)}
+          aria-label="Go to home"
+        >
           <img src={img} alt="Agriconsulting Maroc" className="mobile-logo" />
-        </Link>
+        </button>
 
-        <button className="mobile-menu-btn" onClick={() => setOpen(!open)}>
+        <button
+          type="button"
+          className="mobile-menu-btn"
+          onClick={() => setOpen((value) => !value)}
+          aria-label="Toggle navigation menu"
+        >
           {open ? <IoClose size={30} /> : <GiHamburgerMenu size={28} />}
         </button>
       </div>
@@ -28,33 +90,55 @@ function NavbarMobile() {
         <div className="mobile-nav">
           <ul>
             <li className="nav-item">
-              <Link to="home" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+              <button
+                type="button"
+                className="mobile-nav-link-btn"
+                onClick={() => scrollToSection("home", -80)}
+              >
                 Carrières
-              </Link>
+              </button>
             </li>
 
             <li className="nav-item">
-              <Link to="about" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+              <button
+                type="button"
+                className="mobile-nav-link-btn"
+                onClick={() => scrollToSection("about", -80)}
+              >
                 À propos de nous
-              </Link>
+              </button>
             </li>
 
             <li className="nav-item">
-              <Link to="sectors" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+              <button
+                type="button"
+                className="mobile-nav-link-btn"
+                onClick={() => scrollToSection("sectors", -80)}
+              >
                 Secteurs
-              </Link>
+              </button>
             </li>
 
             <li className="nav-item">
-              <Link to="references" spy smooth offset={-80} duration={300} onClick={closeNavbar}>
+              <button
+                type="button"
+                className={`mobile-nav-link-btn ${
+                  location.pathname === "/references" ? "active" : ""
+                }`}
+                onClick={goToReferences}
+              >
                 Références
-              </Link>
+              </button>
             </li>
 
             <li className="nav-item">
-              <Link to="contact" spy smooth offset={80} duration={300} onClick={closeNavbar}>
+              <button
+                type="button"
+                className="mobile-nav-link-btn"
+                onClick={() => scrollToSection("contact", 0)}
+              >
                 Contact
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

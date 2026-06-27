@@ -1,47 +1,82 @@
-import './App.css';
-import Navbar from './components/navbar/Navbar';
-import NavbarMobile from './components/navbar/NavbarMobile';
-import Home from './components/Home/Home';
-import About from './components/About/About';
+import "./App.css";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+import Navbar from "./components/navbar/Navbar";
+import NavbarMobile from "./components/navbar/NavbarMobile";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
 import ScrollToTop from "react-scroll-to-top";
-import Footer from './components/footer/Footer';
-import Contact from './components/Contact/Contact';
-import References from './components/References/references';
-import Sectors from './components/Sectors/Sectors';
- 
+import Footer from "./components/footer/Footer";
+import Contact from "./components/Contact/Contact";
+import References from "./components/References/references";
+import ReferencesPage from "./components/References/ReferencesPage";
+import Sectors from "./components/Sectors/Sectors";
+
+function LandingPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const sectionId = location.state?.scrollTo;
+    const offset = location.state?.offset ?? -100;
+
+    if (!sectionId) return;
+
+    const timer = setTimeout(() => {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        const top =
+          section.getBoundingClientRect().top + window.pageYOffset + offset;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth",
+        });
+      }
+    }, 120);
+
+    return () => clearTimeout(timer);
+  }, [location]);
+
+  return (
+    <>
+      <Home />
+      <About />
+      <Sectors />
+      <References />
+      <Contact />
+    </>
+  );
+}
 
 function App() {
   return (
-    <div >
-      <Navbar/>
-      <NavbarMobile/>
-      <Home/>
-      <About/>
-      <Sectors/>
-      <References/>
-      <Contact/>
+    <BrowserRouter>
+      <Navbar />
+      <NavbarMobile />
+
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/references" element={<ReferencesPage />} />
+      </Routes>
 
       <ScrollToTop
-  smooth
-  className="scroll"
-  color="white"
-  height="20"
-  width="20"
-  style={{
-    borderRadius: "50%",
-    backgroundColor: "var(--green-main)",
-  }}
-/>
-      <Footer></Footer>
+        smooth
+        className="scroll"
+        color="white"
+        height="20"
+        width="20"
+        style={{
+          borderRadius: "50%",
+          zIndex: 999999,
+          backgroundColor: "var(--green-main)",
+        }}
+      />
 
-
-    </div>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-
-// 40
-//20
-//lottifiles

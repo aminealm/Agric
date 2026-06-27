@@ -31,6 +31,18 @@
     box-shadow: 0 8px 24px rgba(31, 41, 51, 0.16);
   }
 
+  .mobile-logo-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
   .mobile-logo {
     width: auto;
     height: 54px;
@@ -87,11 +99,15 @@
     list-style: none;
   }
 
-  .mobile-nav .nav-item a {
+  .mobile-nav-link-btn {
     width: 100%;
     padding: 15px 28px;
 
     display: block;
+
+    border: none;
+    outline: none;
+    margin: 0;
 
     color: var(--white);
     background-color: var(--green-deep);
@@ -99,14 +115,16 @@
     font-family: "Jost", "Open Sans", Arial, sans-serif;
     font-size: 17px;
     font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
     text-decoration: none;
 
     cursor: pointer;
     transition: 0.3s ease;
   }
 
-  .mobile-nav .nav-item a:hover,
-  .mobile-nav .nav-item a.active {
+  .mobile-nav-link-btn:hover,
+  .mobile-nav-link-btn.active {
     background-color: var(--green-dark);
     color: var(--white);
   }

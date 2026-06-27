@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { references } from "./Data";
+import ReferenceCard from "./ReferenceCard";
 import "./references.css";
 
 function References() {
+  const navigate = useNavigate();
+
+  const landingReferences = references.slice(0, 6);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollState, setScrollState] = useState({
     atStart: true,
@@ -12,7 +18,7 @@ function References() {
   const carouselRef = useRef(null);
 
   const visibleCards = 3;
-  const maxIndex = Math.max(references.length - visibleCards, 0);
+  const maxIndex = Math.max(landingReferences.length - visibleCards, 0);
 
   const isScrollableLayout = () => window.innerWidth <= 1100;
 
@@ -29,7 +35,6 @@ function References() {
 
   useEffect(() => {
     updateScrollButtons();
-
     window.addEventListener("resize", updateScrollButtons);
 
     return () => {
@@ -143,34 +148,23 @@ function References() {
           className="references-track"
           style={{ "--slide-index": currentIndex }}
         >
-          {references.map((reference) => (
-            <article className="reference-card" key={reference.id}>
-              <div className="reference-card-content">
-                <h3>{reference.title}</h3>
-
-                <div className="reference-bottom">
-                  <div className="reference-meta">
-                    <div>
-                      <span className="meta-icon">▧</span>
-                      <strong>{reference.sector}</strong>
-                    </div>
-
-                    <div>
-                      <span className="meta-icon">⌖</span>
-                      <strong>{reference.country}</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <button className="reference-more">↗ Voir plus</button>
-            </article>
+          {landingReferences.map((reference) => (
+            <ReferenceCard
+              key={reference.id}
+              reference={reference}
+              showId={false}
+              onMoreClick={() => navigate(`/references?selected=${reference.id}`)}
+            />
           ))}
         </div>
       </div>
 
       <div className="references-actions container">
-        <button className="references-all-btn">
+        <button
+          type="button"
+          className="references-all-btn"
+          onClick={() => navigate("/references")}
+        >
           ↗ Voir toutes les références
         </button>
       </div>

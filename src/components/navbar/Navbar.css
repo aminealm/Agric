@@ -1,3 +1,22 @@
+.navbar-logo-btn,
+.nav-link-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.navbar-logo-btn {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-btn.active {
+  color: var(--green-accent);
+}
 .navbar-main {
   width: 100%;
   height: 70px;

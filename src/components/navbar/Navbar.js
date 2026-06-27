@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { Link } from "react-scroll";
 import img from "../../img/logo2.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const isInnerPage = location.pathname !== "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,48 +24,116 @@ const Navbar = () => {
     };
   }, []);
 
+  const scrollToSection = (sectionId, offset = -100) => {
+    if (location.pathname === "/") {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        const top =
+          section.getBoundingClientRect().top + window.pageYOffset + offset;
+
+        window.scrollTo({
+          top,
+          behavior: "smooth",
+        });
+      }
+
+      return;
+    }
+
+    navigate("/", {
+      state: {
+        scrollTo: sectionId,
+        offset,
+      },
+    });
+  };
+
+const goToReferences = () => {
+  if (location.pathname === "/references") {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    return;
+  }
+
+  navigate("/references");
+
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  }, 0);
+};
+
   return (
-    <nav className={isScrolled ? "navbar-main black" : "navbar-main"} id="navbar">
-      <Link to="home" spy smooth offset={-100} duration={300}>
-        <img src={img} alt="Ameigr" className="logo" />
-      </Link>
+    <nav
+      className={isScrolled || isInnerPage ? "navbar-main black" : "navbar-main"}
+      id="navbar"
+    >
+      <button
+        type="button"
+        className="navbar-logo-btn"
+        onClick={() => scrollToSection("home", -100)}
+        aria-label="Go to home"
+      >
+        <img src={img} alt="Agriconsulting" className="logo" />
+      </button>
 
       <ul>
         <li className="nav-item">
-          <Link to="home" spy smooth offset={-100} duration={300}>
+          <button
+            type="button"
+            className="nav-link-btn"
+            onClick={() => scrollToSection("home", -100)}
+          >
             Carrières
-          </Link>
+          </button>
         </li>
 
         <li className="nav-item">
-          <Link to="about" spy smooth offset={-100} duration={300}>
+          <button
+            type="button"
+            className="nav-link-btn"
+            onClick={() => scrollToSection("about", -100)}
+          >
             À propos de nous
-          </Link>
+          </button>
         </li>
 
         <li className="nav-item">
-          <Link to="sectors" spy smooth offset={0} duration={300}>
+          <button
+            type="button"
+            className="nav-link-btn"
+            onClick={() => scrollToSection("sectors", 0)}
+          >
             Secteurs
-          </Link>
+          </button>
         </li>
 
         <li className="nav-item">
-          <Link to="references" spy smooth offset={-100} duration={300}>
+          <button
+            type="button"
+            className={`nav-link-btn ${
+              location.pathname === "/references" ? "active" : ""
+            }`}
+            onClick={goToReferences}
+          >
             Références
-          </Link>
+          </button>
         </li>
 
-        {/* <li className="nav-item">
-          <Link to="sponsors" spy smooth offset={-100} duration={300}>
-            Actualités
-          </Link>
-        </li> */}
-
-        
         <li className="nav-item">
-          <Link to="contact" spy smooth offset={0} duration={300}>
+          <button
+            type="button"
+            className="nav-link-btn"
+            onClick={() => scrollToSection("contact", 0)}
+          >
             Contact
-          </Link>
+          </button>
         </li>
       </ul>
     </nav>
