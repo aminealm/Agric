@@ -1,40 +1,17 @@
+@import "../_shared/design-system.css";
+
 .references-section {
   width: 100%;
-  min-height: 90vh;
-  padding: 100px 0;
-  background: var(--white);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(24, 184, 90, 0.08), transparent 28%),
+    var(--white);
   overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Header */
-.references-header {
-  text-align: center;
-  margin-bottom: 60px;
 }
 
 .references-header h2 {
-  font-family: "Jost", sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  text-transform: uppercase;
   color: var(--green-forest);
-  margin: 0 0 12px;
 }
 
-.references-line {
-  display: block;
-  width: 72px;
-  height: 3px;
-  background: var(--green-accent);
-  margin: 0 auto;
-  border-radius: 999px;
-}
-
-/* Carousel */
 .references-carousel {
   width: 100%;
   overflow: hidden;
@@ -48,37 +25,18 @@
   transform: translateX(calc(-1 * var(--slide-index) * (33.3333% + 24px)));
 }
 
-/* Card sizing only. Card design is in ReferenceCard.css */
 .references-track .reference-card {
   flex: 0 0 calc(33.3333% - 16px);
 }
 
-/* Actions */
 .references-actions {
   margin-top: 38px;
   display: flex;
   justify-content: center;
 }
 
-.references-all-btn {
-  border: none;
-  border-radius: 999px;
-  padding: 14px 24px;
-  background: var(--green-accent-soft);
-  color: var(--green-forest);
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.references-all-btn:hover {
-  background: var(--green-accent);
-  color: var(--white);
-}
-
-/* Controls */
 .references-controls {
-  margin-top: 35px;
+  margin-top: 28px;
   display: flex;
   justify-content: center;
   gap: 14px;
@@ -93,11 +51,15 @@
   color: var(--white);
   font-size: 18px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .references-controls button:hover {
-  background: var(--green-accent);
+  background: var(--green-main);
+  transform: translateY(-2px);
 }
 
 .references-controls button:disabled {
@@ -109,12 +71,6 @@
   transform: none;
 }
 
-.references-controls button:disabled:hover {
-  background: var(--gray-border);
-  transform: none;
-}
-
-/* Tablet + small laptop */
 @media (max-width: 1100px) {
   .references-carousel {
     overflow-x: auto;
@@ -147,35 +103,11 @@
 
   .references-track .reference-card {
     flex: 0 0 62vw;
-    height: 310px;
     scroll-snap-align: start;
   }
 }
 
-/* Phone */
 @media (max-width: 700px) {
-  .references-section {
-    min-height: 100vh;
-    padding: 80px 0;
-    justify-content: center;
-  }
-
-  .references-header {
-    text-align: left;
-    margin-bottom: 38px;
-    padding: 0 26px;
-  }
-
-  .references-header h2 {
-    font-size: 34px;
-    text-transform: none;
-    margin-bottom: 0;
-  }
-
-  .references-line {
-    display: none;
-  }
-
   .references-carousel {
     padding: 0 0 0 26px;
   }
@@ -186,13 +118,15 @@
 
   .references-track .reference-card {
     flex: 0 0 88vw;
-    height: 330px;
   }
 
   .references-actions {
-    margin-top: 38px;
+    margin-top: 34px;
     justify-content: flex-start;
-    padding: 0 26px;
+  }
+
+  .references-actions .references-all-btn {
+    width: 100%;
   }
 
   .references-controls {
@@ -200,10 +134,8 @@
   }
 }
 
-/* Very small phones */
 @media (max-width: 420px) {
   .references-track .reference-card {
     flex: 0 0 90vw;
-    height: 350px;
   }
 }

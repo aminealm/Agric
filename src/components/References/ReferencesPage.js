@@ -110,16 +110,17 @@ function ReferencesPage() {
   return (
     <main className="references-page">
       <section className="references-page-hero">
-        <div className="references-page-container references-page-hero-content">
-          <h1>Our references</h1>
+        <div className="section-container--wide references-page-hero-content">
+          <span className="section-eyebrow">Nos réalisations</span>
+          <h1>Nos références</h1>
 
           <div className="references-page-toolbar">
-            <label className="references-search" aria-label="Search references">
+            <label className="references-search" aria-label="Rechercher une référence">
               <input
                 type="search"
                 value={search}
                 onChange={handleSearchChange}
-                placeholder="Search"
+                placeholder="Rechercher"
               />
             </label>
 
@@ -128,16 +129,16 @@ function ReferencesPage() {
               className={`references-filter-btn ${filtersOpen ? "active" : ""}`}
               onClick={() => setFiltersOpen((value) => !value)}
             >
-              + Filters
+              + Filtres
             </button>
 
             <label className="references-sort">
-              <span>Sort by</span>
+              <span>Trier par</span>
 
               <select value={sortBy} onChange={handleSortChange}>
-                <option value="latest">Latest</option>
-                <option value="oldest">Oldest</option>
-                <option value="title">Title</option>
+                <option value="latest">Plus récents</option>
+                <option value="oldest">Plus anciens</option>
+                <option value="title">Titre</option>
               </select>
             </label>
           </div>
@@ -145,29 +146,29 @@ function ReferencesPage() {
           {filtersOpen && (
             <div className="references-filter-panel">
               <label>
-                Sector
+                Secteur
                 <select value={sector} onChange={handleSectorChange}>
                   {sectors.map((item) => (
                     <option value={item} key={item}>
-                      {item === "all" ? "All sectors" : item}
+                      {item === "all" ? "Tous les secteurs" : item}
                     </option>
                   ))}
                 </select>
               </label>
 
               <label>
-                Country
+                Pays
                 <select value={country} onChange={handleCountryChange}>
                   {countries.map((item) => (
                     <option value={item} key={item}>
-                      {item === "all" ? "All countries" : item}
+                      {item === "all" ? "Tous les pays" : item}
                     </option>
                   ))}
                 </select>
               </label>
 
               <button type="button" onClick={resetFilters}>
-                Reset
+                Réinitialiser
               </button>
             </div>
           )}
@@ -175,9 +176,10 @@ function ReferencesPage() {
       </section>
 
       <section className="references-page-results">
-        <div className="references-page-container">
+        <div className="section-container--wide">
           <p className="references-results-count">
-            {filteredReferences.length} results
+            {filteredReferences.length} résultat
+            {filteredReferences.length > 1 ? "s" : ""}
           </p>
 
           {filteredReferences.length > 0 ? (
@@ -199,7 +201,7 @@ function ReferencesPage() {
                 <div className="references-load-more-wrapper">
                   <button
                     type="button"
-                    className="references-load-more-btn"
+                    className="btn-main references-load-more-btn"
                     onClick={loadMoreReferences}
                   >
                     + Voir plus
@@ -208,12 +210,12 @@ function ReferencesPage() {
               )}
             </>
           ) : (
-            <div className="references-empty-state">
-              <h2>No references found</h2>
-              <p>Try another search keyword or reset the filters.</p>
+            <div className="references-empty-state ui-card">
+              <h2>Aucune référence trouvée</h2>
+              <p>Essayez un autre mot-clé ou réinitialisez les filtres.</p>
 
-              <button type="button" onClick={resetFilters}>
-                Reset filters
+              <button type="button" className="btn-secondary" onClick={resetFilters}>
+                Réinitialiser les filtres
               </button>
             </div>
           )}

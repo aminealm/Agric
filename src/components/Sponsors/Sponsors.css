@@ -1,64 +1,81 @@
+@import "../_shared/design-system.css";
 
-
-
-@media (max-width:1000px) {
-    .feedback-slider{
-        height: auto;
-        width: auto;
-        overflow: hidden;
-       
-    }
-    
-}
-/* 
-.content-slider{
-    padding: 10px;
-
-    display: block;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 150px;
-    margin-top: 80px;
+.partners-section {
+  background:
+    radial-gradient(circle at top left, rgba(24, 184, 90, 0.06), transparent 32%),
+    var(--white);
+  overflow: hidden;
 }
 
-.content-slider img.center-image{
-    display: block;
-    margin: auto;
-    width: 30%;
-    height: 30%;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: -30px;
-    margin-right:  auto;
-    margin-left: auto;
-    object-fit: cover;
-    
-    
+.partners-header {
+  margin-bottom: 34px;
 }
 
+.partners-header h2 {
+  color: var(--green-forest);
+}
 
+.partners-slider {
+  padding: 6px 0 38px;
+}
 
-.slick-disable {
-   
-    pointer-events: none;
-} */
+.partners-slide {
+  padding: 14px;
+}
 
- .logos img {
-    display: block;
-    margin: auto;
-    width: 60%;
-    height: 60%;
-    padding-top: 40px;
-    
-    
+.partners-logo {
+  height: 132px;
+  padding: 24px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+}
+
+.partners-logo img {
+  display: block;
+  max-width: 82%;
+  max-height: 78px;
+  object-fit: contain;
+  filter: grayscale(8%);
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
+}
+
+.partners-logo:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
+
+.partners-slider .slick-dots {
+  bottom: -22px;
+}
+
+.partners-slider .slick-dots li button::before {
+  color: var(--green-main);
+  opacity: 0.35;
+}
+
+.partners-slider .slick-dots li.slick-active button::before {
+  opacity: 1;
+  color: var(--green-main);
+}
+
+.logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.logos img {
+  display: block;
+  width: 60%;
+  height: auto;
+  margin: auto;
+  padding-top: 40px;
+}
+
+@media (max-width: 700px) {
+  .partners-logo {
+    height: 110px;
+    padding: 18px;
   }
-  
-  .logos{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    
-  
-  }
- 
+}

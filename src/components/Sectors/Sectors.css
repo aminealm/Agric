@@ -1,30 +1,29 @@
+@import "../_shared/design-system.css";
+
+/*
+  Sector section patch:
+  - keeps the OLD sector card style/layout
+  - keeps the new unified green background/colors
+  - keeps the cleaner section header from the UI cleanup
+*/
+
 .sectors-section {
   width: 100%;
-  min-height: 100vh;
-  padding: 110px 0;
-  background: var(--green-forest);
+  background:
+    radial-gradient(circle at top right, rgba(24, 184, 90, 0.16), transparent 36%),
+    linear-gradient(135deg, var(--green-deep), #10241a 58%, var(--green-forest));
+  overflow: hidden;
 }
 
-.sectors-title h2 {
-  text-align: center;
-  font-family: "Jost", sans-serif;
-  font-size: 38px;
-  font-weight: 700;
-  text-transform: uppercase;
+.sectors-header h2 {
   color: var(--white);
-  margin: 0 0 12px;
 }
 
-/* Same tiny line as Contact */
-.line {
-  display: block;
-  width: 72px;
-  height: 3px;
-  background: var(--green-main);
-  margin: 0 auto;
-  border-radius: 999px;
+.sectors-header p {
+  color: rgba(255, 255, 255, 0.72);
 }
 
+/* OLD CARD LAYOUT RESTORED */
 .sectors-grid {
   margin-top: 5rem;
   display: grid;
@@ -36,7 +35,9 @@
   position: relative;
   min-height: 230px;
   padding: 35px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   display: flex;
   align-items: flex-start;
@@ -46,6 +47,8 @@
   overflow: hidden;
   cursor: pointer;
   background: transparent;
+  box-shadow: none;
+  transition: background 0.35s ease;
 }
 
 .sector-item::before {
@@ -69,7 +72,9 @@
   position: absolute;
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.55);
+  background:
+    linear-gradient(135deg, rgba(6, 27, 22, 0.84), rgba(6, 27, 22, 0.46)),
+    rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: opacity 0.45s ease;
   z-index: 2;
@@ -88,9 +93,10 @@
 .sector-content h3 {
   font-family: "Jost", sans-serif;
   font-size: 25px;
-  font-weight: 700;
+  font-weight: 750;
   color: var(--white);
   margin-bottom: 14px;
+  letter-spacing: -0.025em;
   transition: color 0.35s ease;
 }
 
@@ -116,6 +122,10 @@
   font-size: 20px;
   cursor: pointer;
   transition: 0.35s ease;
+}
+
+.sector-item:hover {
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .sector-item:hover::before {
@@ -149,19 +159,6 @@
 }
 
 @media (max-width: 600px) {
-  .sectors-section {
-    padding: 80px 0;
-  }
-
-  .sectors-title h2 {
-    font-size: 30px;
-  }
-
-  .line {
-    width: 72px;
-    height: 3px;
-  }
-
   .sectors-grid {
     margin-top: 3rem;
   }

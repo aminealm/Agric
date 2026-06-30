@@ -6,7 +6,6 @@ import "./references.css";
 
 function References() {
   const navigate = useNavigate();
-
   const landingReferences = references.slice(0, 6);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +15,6 @@ function References() {
   });
 
   const carouselRef = useRef(null);
-
   const visibleCards = 3;
   const maxIndex = Math.max(landingReferences.length - visibleCards, 0);
 
@@ -99,7 +97,6 @@ function References() {
     carousel.dataset.isDragging = "true";
     carousel.dataset.startX = event.clientX;
     carousel.dataset.scrollLeft = carousel.scrollLeft;
-
     carousel.setPointerCapture(event.pointerId);
   };
 
@@ -124,15 +121,21 @@ function References() {
     try {
       carousel.releasePointerCapture(event.pointerId);
     } catch {
-      // ignore
+      // Pointer was already released.
     }
   };
 
   return (
-    <section className="references-section" id="references">
-      <div className="references-header container">
-        <h2>Références</h2>
-        <span className="references-line"></span>
+    <section className="section section--white references-section" id="references">
+      <div className="section-container">
+        <div className="section-header references-header">
+          <span className="section-eyebrow">Nos réalisations</span>
+          <h2>Références</h2>
+          <p>
+            Une sélection de projets et missions menés auprès d’acteurs publics
+            et privés au Maroc et à l’international.
+          </p>
+        </div>
       </div>
 
       <div
@@ -159,22 +162,32 @@ function References() {
         </div>
       </div>
 
-      <div className="references-actions container">
+      <div className="references-actions section-container">
         <button
           type="button"
-          className="references-all-btn"
+          className="btn-secondary references-all-btn"
           onClick={() => navigate("/references")}
         >
           ↗ Voir toutes les références
         </button>
       </div>
 
-      <div className="references-controls container">
-        <button onClick={previousReference} disabled={isPreviousDisabled}>
+      <div className="references-controls section-container">
+        <button
+          type="button"
+          onClick={previousReference}
+          disabled={isPreviousDisabled}
+          aria-label="Référence précédente"
+        >
           ←
         </button>
 
-        <button onClick={nextReference} disabled={isNextDisabled}>
+        <button
+          type="button"
+          onClick={nextReference}
+          disabled={isNextDisabled}
+          aria-label="Référence suivante"
+        >
           →
         </button>
       </div>

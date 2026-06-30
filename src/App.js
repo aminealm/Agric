@@ -12,6 +12,27 @@ import Contact from "./components/Contact/Contact";
 import References from "./components/References/references";
 import ReferencesPage from "./components/References/ReferencesPage";
 import Sectors from "./components/Sectors/Sectors";
+import TeamShowcase from "./components/Team/TeamShowcase";
+
+function ScrollReset() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    if (location.state?.scrollTo) return;
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [location.pathname]);
+
+  return null;
+}
 
 function LandingPage() {
   const location = useLocation();
@@ -53,11 +74,14 @@ function LandingPage() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollReset />
+
       <Navbar />
       <NavbarMobile />
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<TeamShowcase />} />
         <Route path="/references" element={<ReferencesPage />} />
       </Routes>
 

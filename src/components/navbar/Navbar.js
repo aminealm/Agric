@@ -8,12 +8,11 @@ const Navbar = () => {
   const location = useLocation();
 
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const isInnerPage = location.pathname !== "/";
+  const isSolidNavbar = isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 12);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,7 +23,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const scrollToSection = (sectionId, offset = -100) => {
+  const scrollToSection = (sectionId, offset = -96) => {
     if (location.pathname === "/") {
       const section = document.getElementById(sectionId);
 
@@ -49,93 +48,85 @@ const Navbar = () => {
     });
   };
 
-const goToReferences = () => {
-  if (location.pathname === "/references") {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  const goToAbout = () => {
+    if (location.pathname === "/about") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-    return;
-  }
+    navigate("/about");
 
-  navigate("/references");
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }, 0);
+  };
 
-  setTimeout(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-  }, 0);
-};
+  const goToReferences = () => {
+    if (location.pathname === "/references") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    navigate("/references");
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }, 0);
+  };
+
+ const navItems = [
+  {
+    label: "À propos",
+    onClick: goToAbout,
+    active: location.pathname === "/about",
+  },
+  {
+    label: "Secteurs",
+    onClick: () => scrollToSection("sectors", -90),
+  },
+  {
+    label: "Références",
+    onClick: goToReferences,
+    active: location.pathname === "/references",
+  },
+  {
+    label: "Contact",
+    onClick: () => scrollToSection("contact", -90),
+  },
+];
 
   return (
     <nav
-      className={isScrolled || isInnerPage ? "navbar-main black" : "navbar-main"}
+      className={`navbar-main ${isSolidNavbar ? "navbar-main--solid" : ""}`}
       id="navbar"
     >
-      <button
-        type="button"
-        className="navbar-logo-btn"
-        onClick={() => scrollToSection("home", -100)}
-        aria-label="Go to home"
-      >
-        <img src={img} alt="Agriconsulting" className="logo" />
-      </button>
+      <div className="navbar-shell">
+  <button
+    type="button"
+    className="navbar-logo-btn"
+    onClick={() => scrollToSection("home", -96)}
+    aria-label="Aller à l'accueil"
+  >
+    <img src={img} alt="Agriconsulting Maroc" className="navbar-logo" />
+  </button>
 
-      <ul>
-        <li className="nav-item">
-          <button
-            type="button"
-            className="nav-link-btn"
-            onClick={() => scrollToSection("home", -100)}
-          >
-            Carrières
-          </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            type="button"
-            className="nav-link-btn"
-            onClick={() => scrollToSection("about", -100)}
-          >
-            À propos de nous
-          </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            type="button"
-            className="nav-link-btn"
-            onClick={() => scrollToSection("sectors", 0)}
-          >
-            Secteurs
-          </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            type="button"
-            className={`nav-link-btn ${
-              location.pathname === "/references" ? "active" : ""
-            }`}
-            onClick={goToReferences}
-          >
-            Références
-          </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            type="button"
-            className="nav-link-btn"
-            onClick={() => scrollToSection("contact", 0)}
-          >
-            Contact
-          </button>
-        </li>
-      </ul>
+  <ul className="navbar-links" aria-label="Navigation principale">
+    {navItems.map((item) => (
+      <li className="navbar-link-item" key={item.label}>
+        <button
+          type="button"
+          className={`nav-link-btn ${item.active ? "active" : ""}`}
+          onClick={item.onClick}
+        >
+          <span className="nav-link-arrow" aria-hidden="true">
+            ↗
+          </span>
+          <span>{item.label}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
     </nav>
   );
 };

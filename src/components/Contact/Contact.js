@@ -10,26 +10,26 @@ import {
 
 function Contact() {
   return (
-    <section id="contact" className="contact-section">
-      <div className="contact-container">
-        <div className="contact-title">
-          <h2>CONTACT</h2>
-          <span></span>
+    <section id="contact" className="section contact-section">
+      <div className="section-container contact-container">
+        <div className="section-header contact-title">
+          <span className="section-eyebrow">Contact</span>
+          <h2>Parlons de votre prochain projet</h2>
+          <p>
+            Notre équipe reste à votre disposition pour toute demande
+            d’information, d’étude ou de collaboration.
+          </p>
         </div>
 
-        <div className="contact-card">
+        <div className="contact-card ui-card">
           <div className="contact-info-panel">
-            <span className="contact-small-title">Nous contacter</span>
+            <span className="contact-small-title">Agriconsulting Maroc SA</span>
 
-            <h3>
-              Parlons de votre
-              <br />
-              prochain projet
-            </h3>
+            <h3>Nous sommes à votre écoute</h3>
 
             <p className="contact-description">
-              Notre équipe reste à votre disposition pour toute demande
-              d’information ou collaboration.
+              Contactez-nous pour vos projets agricoles, territoriaux,
+              environnementaux ou institutionnels.
             </p>
 
             <div className="contact-details">
@@ -43,9 +43,9 @@ function Contact() {
                   <p>
                     Agriconsulting Maroc SA
                     <br />
-                    Immeuble 80, Appartement n°11,
+                    24, App. 10, 3ème étage
                     <br />
-                    Rue Oued Tensift, Agdal, Rabat
+                    Avenue de France, Agdal - Rabat, Maroc
                   </p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ function Contact() {
 
             <a
               href="mailto:contact@agriconsulting.ma"
-              className="contact-email-btn"
+              className="btn-main contact-email-btn"
             >
               <FaEnvelope />
               Envoyez un mail
@@ -93,7 +93,7 @@ function Contact() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
 
             <div className="map-floating-card">
               <strong>Agriconsulting Maroc SA</strong>

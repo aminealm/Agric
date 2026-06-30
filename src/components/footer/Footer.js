@@ -4,13 +4,15 @@ import "./footer.css";
 function Footer() {
   return (
     <footer className="main-footer" id="footer">
-      <div className="footer-bottom">
+      <div className="footer-inner">
+        <div>
+          <strong>Agriconsulting Maroc SA</strong>
+          <p>Expertise agricole, territoriale et environnementale.</p>
+        </div>
+
         <div className="copyright">
-          &copy; Copyright{" "}
-          <strong>
-            <span>Agriconsulting SA</span>
-          </strong>
-          . All Rights Reserved
+          &copy; {new Date().getFullYear()} Agriconsulting SA. Tous droits
+          réservés.
         </div>
       </div>
     </footer>

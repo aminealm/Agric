@@ -3,17 +3,20 @@ import { sectors } from "./Data";
 
 function Sectors() {
   return (
-    <section className="sectors-section" id="sectors">
-      <div className="container">
-        <div className="sectors-title">
-          <h2>Secteurs</h2>
+    <section className="section section--dark sectors-section" id="sectors">
+      <div className="section-container">
+        <div className="section-header sectors-header">
+          <span className="section-eyebrow">Nos domaines</span>
+          <h2>Secteurs d’intervention</h2>
+          <p>
+            Une expertise multisectorielle pour accompagner les projets
+            agricoles, ruraux, territoriaux et environnementaux.
+          </p>
         </div>
-
-        <span className="line"></span>
 
         <div className="sectors-grid">
           {sectors.map((sector) => (
-            <div
+            <article
               className="sector-item"
               key={sector.id}
               style={{ "--sector-image": `url(${sector.image})` }}
@@ -23,8 +26,14 @@ function Sectors() {
                 <p>{sector.description}</p>
               </div>
 
-              <button className="sector-arrow">↗</button>
-            </div>
+              <button
+                type="button"
+                className="sector-arrow"
+                aria-label={`Voir le secteur ${sector.title}`}
+              >
+                ↗
+              </button>
+            </article>
           ))}
         </div>
       </div>

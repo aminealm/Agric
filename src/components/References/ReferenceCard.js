@@ -2,11 +2,9 @@ import "./ReferenceCard.css";
 
 function ReferenceCard({ reference, showId = false, onMoreClick }) {
   return (
-    <article className="reference-card">
+    <article className="reference-card ui-card">
       <div className="reference-card-content">
-        {showId && (
-          <span className="reference-card-id">{reference.id}</span>
-        )}
+        {showId && <span className="reference-card-id">{reference.id}</span>}
 
         <h3>{reference.title}</h3>
 

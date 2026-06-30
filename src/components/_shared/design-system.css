@@ -1,0 +1,296 @@
+/* Agriconsulting shared visual system
+   Import this file once globally, or keep the @import lines in the component CSS files below. */
+
+:root {
+  --black: #0B0F0D;
+  --green-dark: #064E3B;
+  --green-main: #16A34A;
+  --green-soft: #EEF8F1;
+  --white: #FFFFFF;
+  --background: #F7F9F5;
+  --text-muted: #66746D;
+  --border-soft: rgba(11, 15, 13, 0.10);
+
+
+  /* Neutrals */
+  --white: #ffffff;
+  --black: #000000;
+  --bg-soft: #f7f8f5;
+  --gray-soft: #eef1ec;
+  --gray-border: #dbe4dd;
+  --text-dark: #10231b;
+  --text-muted: #66746d;
+  --text-light: rgba(255, 255, 255, 0.84);
+  --border-soft: rgba(16, 35, 27, 0.1);
+
+  /* Effects */
+  --shadow-soft: 0 18px 45px rgba(16, 35, 27, 0.1);
+  --shadow-medium: 0 24px 70px rgba(16, 35, 27, 0.14);
+  --shadow-strong: 0 32px 90px rgba(16, 35, 27, 0.18);
+
+  /* Layout */
+  --container: 1180px;
+  --container-wide: 1280px;
+  --radius-card: 24px;
+  --radius-panel: 30px;
+  --radius-btn: 999px;
+
+  /* Motion */
+  --transition-fast: 0.25s ease;
+  --transition-smooth: 0.35s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Jost", "Open Sans", Arial, sans-serif;
+  color: var(--text-dark);
+  background: var(--bg-soft);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+iframe {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1,
+.page-title {
+  font-size: clamp(42px, 5vw, 64px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+h2,
+.section-title {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+h3,
+.card-title {
+  font-size: clamp(21px, 2vw, 26px);
+  line-height: 1.2;
+  font-weight: 750;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.container-fluide {
+  width: 100%;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.section--soft {
+  background: var(--bg-soft);
+}
+
+.section--white {
+  background: var(--white);
+}
+
+.section--dark {
+  color: var(--white);
+  background: var(--green-deep);
+}
+
+.section-container {
+  width: min(var(--container), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.section-container--wide {
+  width: min(var(--container-wide), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.section-header {
+  max-width: 760px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.section-header h1,
+.section-header h2 {
+  margin-bottom: 16px;
+  color: inherit;
+}
+
+.section-header p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 17px;
+}
+
+.section--dark .section-header p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: var(--green-main);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: "";
+  width: 34px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+}
+
+.btn-main,
+.btn-secondary,
+.btn-ghost {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 26px;
+  border-radius: var(--radius-btn);
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.btn-main {
+  background: var(--green-main);
+  color: var(--white);
+  box-shadow: 0 14px 30px rgba(24, 184, 90, 0.28);
+}
+
+.btn-main:hover {
+  background: var(--green-forest);
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(24, 184, 90, 0.34);
+}
+
+.btn-secondary {
+  background: var(--green-soft);
+  color: var(--green-forest);
+}
+
+.btn-secondary:hover {
+  background: var(--green-main);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--green-main);
+  border: 1px solid rgba(24, 184, 90, 0.35);
+}
+
+.btn-ghost:hover {
+  background: var(--green-main);
+  color: var(--white);
+}
+
+.ui-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth),
+    background var(--transition-smooth);
+}
+
+.ui-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+  border-color: rgba(24, 184, 90, 0.28);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(24, 184, 90, 0.45);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+    text-align: left;
+  }
+
+  .section-header p {
+    margin-left: 0;
+  }
+
+  .section-eyebrow::after {
+    display: none;
+  }
+
+  .btn-main,
+  .btn-secondary,
+  .btn-ghost {
+    min-height: 50px;
+    padding: 0 22px;
+    font-size: 15px;
+  }
+}
