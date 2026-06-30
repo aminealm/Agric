@@ -35,7 +35,12 @@ function ReferencesPage() {
       const title = String(item.title || "").toLowerCase();
       const id = String(item.id || "").toLowerCase();
       const itemSector = String(item.sector || "").toLowerCase();
+      const client = String(item.client || "").toLowerCase();
+      const funding = String(item.funding || "").toLowerCase();
       const itemCountry = String(item.country || "").toLowerCase();
+      const duration = String(item.duration || "").toLowerCase();
+      const partners = String(item.partners || "").toLowerCase();
+      const budget = String(item.budget || "").toLowerCase();
       const year = String(item.year || "").toLowerCase();
 
       const matchesSearch =
@@ -43,7 +48,12 @@ function ReferencesPage() {
         title.includes(query) ||
         id.includes(query) ||
         itemSector.includes(query) ||
+        client.includes(query) ||
+        funding.includes(query) ||
         itemCountry.includes(query) ||
+        duration.includes(query) ||
+        partners.includes(query) ||
+        budget.includes(query) ||
         year.includes(query);
 
       const matchesSector = sector === "all" || item.sector === sector;
@@ -189,7 +199,6 @@ function ReferencesPage() {
                   <ReferenceCard
                     key={reference.id}
                     reference={reference}
-                    showId={true}
                     onMoreClick={() =>
                       navigate(`/references?selected=${reference.id}`)
                     }

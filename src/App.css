@@ -1,54 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap');
-
-:root {
-  --green-main: #18B85A;
-  --green-main-rgb: 24, 184, 90;
-
-  --green-dark: #0F8F45;
-  --green-deep: #0B5D32;
-  --green-forest: #0D2B22;
-  --green-accent: #10B14B;
-  --green-accent-soft: #EAF7EF;
-  --green-soft: #EAF8EF;
-  --green-light: #F6FAF7;
-
-  --text-dark: #1F2933;
-  --text-muted: #64748B;
-  --text-light: #F8FAFC;
-
-  --white: #FFFFFF;
-  --black: #000000;
-  --gray-soft: #F3F5F4;
-  --gray-border: #E2E8E4;
-
-  --border-soft: rgba(31, 41, 51, 0.12);
-  --shadow-soft: 0 18px 45px rgba(31, 41, 51, 0.14);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: 'Jost', 'Open Sans', Arial, sans-serif;
-  color: var(--text-dark);
-  background-color: var(--white);
-}
-
-a {
-  color: var(--green-main);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--green-dark);
-  text-decoration: none;
-}
+@import "./components/_shared/design-system.css";
 
 .scroll {
   width: 50px;
@@ -58,7 +8,6 @@ a:hover {
   background-color: var(--green-dark) !important;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

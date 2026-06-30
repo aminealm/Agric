@@ -48,3 +48,12 @@ export const sectors = [
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
   },
 ];
+
+export const sectorTitles = {
+  agriculture: sectors[0].title,
+  environment: sectors[1].title,
+  tourism: sectors[2].title,
+  institutional: sectors[3].title,
+  valueChains: sectors[4].title,
+  territorial: sectors[5].title,
+};

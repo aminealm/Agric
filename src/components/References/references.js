@@ -155,7 +155,6 @@ function References() {
             <ReferenceCard
               key={reference.id}
               reference={reference}
-              showId={false}
               onMoreClick={() => navigate(`/references?selected=${reference.id}`)}
             />
           ))}

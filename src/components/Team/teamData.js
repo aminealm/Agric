@@ -17,7 +17,7 @@ export const aboutIntro = {
   eyebrow: "À propos de nous",
   title: "Agriconsulting Maroc SA",
   description:
-    "Agriconsulting Maroc est une société anonyme de droit marocain, fondée en 2002 à la suite d’un partenariat italo-marocain. Membre du Groupe Agriconsulting, elle se positionne comme un acteur majeur du conseil, des études et de l’assistance technique au service du développement durable au Maroc et en Afrique.",
+    "Agriconsulting Maroc SA est une société anonyme de droit marocain, fondée en 2002 à la suite d’un partenariat italo-marocain. Membre du Groupe Agriconsulting, en fusion avec le Groupe BF International, elle se positionne comme un acteur majeur du conseil, des études et de l’assistance technique au service du développement durable au Maroc et en Afrique.",
 };
 
 export const aboutCards = [
@@ -48,52 +48,52 @@ export const boardMembers = [
     name: "GRAZIOLI LORENZO",
     role: "Président Directeur Général",
     email: "L.GRAZIOLI@aesagroup.eu",
-    numero: "+212 6 61 24 73 90",
+    numero: " +32 2 736 22 77",
     image: onlinePortraits.lorenzo,
     imagePosition: "center center",
     imageScale: 0.88,
     quote:
       "Pilotage stratégique, vision globale et développement général de la société.",
-    accent: "Direction générale",
+  
   },
   {
     id: 2,
     name: "EL FERRADI ABDELLAH",
     role: "Directeur de Développement Commercial et Opérations Techniques",
     email: "A.elferradi@agriconsulting-ma.com",
-    numero: "+212 6 72 58 14 09",
+    numero: "+212 6 66 10 71 35",
     image: onlinePortraits.abdellah,
     imagePosition: "center center",
     imageScale: 0.92,
     quote:
       "Développement commercial, coordination des opérations techniques et suivi des opportunités.",
-    accent: "Développement commercial",
+   
   },
   {
     id: 3,
     name: "BABA-KHOUYA ASMA",
     role: "Chargée de projets",
     email: "A.babakhouya@agriconsulting-ma.com",
-    numero: "+212 6 63 91 45 22",
+    numero: "+212 6 13 48 95 96",
     image: onlinePortraits.asma,
     imagePosition: "center center",
     imageScale: 0.9,
     quote:
       "Gestion, coordination et suivi opérationnel des projets avec rigueur et efficacité.",
-    accent: "Gestion de projets",
+
   },
   {
     id: 4,
     name: "MAAROUF ILYAS",
     role: "Chargé de projets Junior",
     email: "I.maarouf@agriconsulting-ma.com",
-    numero: "+212 6 68 34 12 57",
+    numero: "+212 6 67 77 68 87",
     image: onlinePortraits.ilyas,
     imagePosition: "center center",
     imageScale: 0.9,
     quote:
       "Appui au suivi des projets, coordination interne et accompagnement des équipes.",
-    accent: "Projets junior",
+ 
   },
 ];
 

@@ -12,6 +12,7 @@ import Contact from "./components/Contact/Contact";
 import References from "./components/References/references";
 import ReferencesPage from "./components/References/ReferencesPage";
 import Sectors from "./components/Sectors/Sectors";
+import SectorsPage from "./components/Sectors/SectorsPage";
 import TeamShowcase from "./components/Team/TeamShowcase";
 
 function ScrollReset() {
@@ -83,6 +84,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<TeamShowcase />} />
         <Route path="/references" element={<ReferencesPage />} />
+        <Route path="/secteurs" element={<SectorsPage />} />
       </Routes>
 
       <ScrollToTop
@@ -104,3 +106,4 @@ function App() {
 }
 
 export default App;
+

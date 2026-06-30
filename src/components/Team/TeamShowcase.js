@@ -177,8 +177,7 @@ function TeamCard({ member, index }) {
       </div>
 
       <div className="team-card__body">
-        <span className="team-card__tag">{member.accent}</span>
-
+        
         <h3>{member.name}</h3>
 
         <p className="team-card__role">{member.role}</p>

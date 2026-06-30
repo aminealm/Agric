@@ -26,13 +26,13 @@ function Sectors() {
                 <p>{sector.description}</p>
               </div>
 
-              <button
+              {/* <button
                 type="button"
                 className="sector-arrow"
                 aria-label={`Voir le secteur ${sector.title}`}
               >
                 ↗
-              </button>
+              </button> */}
             </article>
           ))}
         </div>

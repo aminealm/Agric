@@ -1,21 +1,24 @@
-/* Agriconsulting shared visual system
-   Import this file once globally, or keep the @import lines in the component CSS files below. */
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap");
+
+/* Agriconsulting shared visual system. */
 
 :root {
-  --black: #0B0F0D;
-  --green-dark: #064E3B;
-  --green-main: #16A34A;
-  --green-soft: #EEF8F1;
-  --white: #FFFFFF;
-  --background: #F7F9F5;
-  --text-muted: #66746D;
-  --border-soft: rgba(11, 15, 13, 0.10);
+  /* Brand */
+  --green-main: #16a34a;
+  --green-main-rgb: 22, 163, 74;
+  --green-dark: #064e3b;
+  --green-deep: #0b5d32;
+  --green-forest: #0d2b22;
+  --green-accent: #10b14b;
+  --green-accent-soft: #eaf7ef;
+  --green-soft: #eef8f1;
+  --green-light: #f6faf7;
 
-
-  /* Neutrals */
+  /* Neutral */
   --white: #ffffff;
   --black: #000000;
-  --bg-soft: #f7f8f5;
+  --background: #f7f9f5;
+  --bg-soft: #f7f9f5;
   --gray-soft: #eef1ec;
   --gray-border: #dbe4dd;
   --text-dark: #10231b;
