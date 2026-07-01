@@ -43,9 +43,9 @@ function Contact() {
                   <p>
                     Agriconsulting Maroc SA
                     <br />
-                    Immeuble 80
+                    24, Avenue de France
                     <br />
-                    Rue Oued Tensift, Agdal - Rabat, Maroc
+                    App 10 (3ème étage), Agdal - Rabat, Maroc
                   </p>
                 </div>
               </div>
@@ -97,7 +97,7 @@ function Contact() {
 
             <div className="map-floating-card">
               <strong>Agriconsulting Maroc SA</strong>
-              <span>Immeuble 80, Rue Oued Tensift</span>
+              <span>24, Avenue de France, Agdal - Rabat</span>
             </div>
           </div>
         </div>
