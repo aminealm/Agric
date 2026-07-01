@@ -10,6 +10,7 @@ import ScrollToTop from "react-scroll-to-top";
 import Footer from "./components/footer/Footer";
 import Contact from "./components/Contact/Contact";
 import References from "./components/References/references";
+import ReferenceDetailPage from "./components/References/ReferenceDetailPage";
 import ReferencesPage from "./components/References/ReferencesPage";
 import Sectors from "./components/Sectors/Sectors";
 import SectorsPage from "./components/Sectors/SectorsPage";
@@ -84,6 +85,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<TeamShowcase />} />
         <Route path="/references" element={<ReferencesPage />} />
+        <Route path="/references/:id" element={<ReferenceDetailPage />} />
         <Route path="/secteurs" element={<SectorsPage />} />
       </Routes>
 

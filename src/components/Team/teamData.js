@@ -50,8 +50,8 @@ export const boardMembers = [
     email: "L.GRAZIOLI@aesagroup.eu",
     numero: " +32 2 736 22 77",
     image: onlinePortraits.lorenzo,
-    imagePosition: "center center",
-    imageScale: 0.88,
+    imagePosition: "center 32%",
+    imageScale: 1,
     quote:
       "Pilotage stratégique, vision globale et développement général de la société.",
   
@@ -63,8 +63,8 @@ export const boardMembers = [
     email: "A.elferradi@agriconsulting-ma.com",
     numero: "+212 6 66 10 71 35",
     image: onlinePortraits.abdellah,
-    imagePosition: "center center",
-    imageScale: 0.92,
+    imagePosition: "center 34%",
+    imageScale: 1,
     quote:
       "Développement commercial, coordination des opérations techniques et suivi des opportunités.",
    
@@ -76,8 +76,8 @@ export const boardMembers = [
     email: "A.babakhouya@agriconsulting-ma.com",
     numero: "+212 6 13 48 95 96",
     image: onlinePortraits.asma,
-    imagePosition: "center center",
-    imageScale: 0.9,
+    imagePosition: "center 34%",
+    imageScale: 1,
     quote:
       "Gestion, coordination et suivi opérationnel des projets avec rigueur et efficacité.",
 
@@ -89,8 +89,8 @@ export const boardMembers = [
     email: "I.maarouf@agriconsulting-ma.com",
     numero: "+212 6 67 77 68 87",
     image: onlinePortraits.ilyas,
-    imagePosition: "center center",
-    imageScale: 0.9,
+    imagePosition: "center 34%",
+    imageScale: 1,
     quote:
       "Appui au suivi des projets, coordination interne et accompagnement des équipes.",
  

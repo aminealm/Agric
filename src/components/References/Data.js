@@ -49,7 +49,7 @@ export const references = [
     id: 4,
     sector: sectorTitles.territorial,
     title:
-      "Land Administration Ressourcing Institution Technical Assistance - suspendu a cause des directives presidentielles de M. D. Trump - Millenium Challenge Account - Malawi",
+      "Land Administration Ressourcing Institution Technical Assistance - Millenium Challenge Account - Malawi",
     client: "Millenium Challenge Account - Malawi",
     funding: "MCC",
     duration: "2025",
@@ -63,7 +63,7 @@ export const references = [
     id: 5,
     sector: sectorTitles.territorial,
     title:
-      "Legal Regulatory Drafting Assistance - suspendu a cause des directives presidentielles de M. D. Trump - Millenium Challenge Account - Malawi",
+      "Legal Regulatory Drafting Assistance - Millenium Challenge Account - Malawi",
     client: "Millenium Challenge Account - Malawi",
     funding: "MCC",
     duration: "2024 - 2025",

@@ -17,7 +17,7 @@ function Contact() {
           <h2>Parlons de votre prochain projet</h2>
           <p>
             Notre équipe reste à votre disposition pour toute demande
-            d’information, d’étude ou de collaboration.
+            d'information, d'étude ou de collaboration.
           </p>
         </div>
 
@@ -43,9 +43,9 @@ function Contact() {
                   <p>
                     Agriconsulting Maroc SA
                     <br />
-                    24, App. 10, 3ème étage
+                    Immeuble 80
                     <br />
-                    Avenue de France, Agdal - Rabat, Maroc
+                    Rue Oued Tensift, Agdal - Rabat, Maroc
                   </p>
                 </div>
               </div>
@@ -86,7 +86,7 @@ function Contact() {
           <div className="contact-map-panel">
             <iframe
               title="Agriconsulting Maroc Map"
-              src="https://maps.google.com/maps?q=Immeuble%2080%20Rue%20Oued%20Tensift%20Agdal%20Rabat%20Maroc&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=33.9981346,-6.8469296&t=&z=17&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -97,7 +97,7 @@ function Contact() {
 
             <div className="map-floating-card">
               <strong>Agriconsulting Maroc SA</strong>
-              <span>Agdal, Rabat</span>
+              <span>Immeuble 80, Rue Oued Tensift</span>
             </div>
           </div>
         </div>

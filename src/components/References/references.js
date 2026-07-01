@@ -88,43 +88,6 @@ function References() {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  const handlePointerDown = (event) => {
-    if (!isScrollableLayout()) return;
-
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    carousel.dataset.isDragging = "true";
-    carousel.dataset.startX = event.clientX;
-    carousel.dataset.scrollLeft = carousel.scrollLeft;
-    carousel.setPointerCapture(event.pointerId);
-  };
-
-  const handlePointerMove = (event) => {
-    const carousel = carouselRef.current;
-    if (!carousel || carousel.dataset.isDragging !== "true") return;
-
-    const startX = Number(carousel.dataset.startX);
-    const scrollLeft = Number(carousel.dataset.scrollLeft);
-    const moveX = event.clientX - startX;
-
-    carousel.scrollLeft = scrollLeft - moveX;
-  };
-
-  const stopDragging = (event) => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    carousel.dataset.isDragging = "false";
-    updateScrollButtons();
-
-    try {
-      carousel.releasePointerCapture(event.pointerId);
-    } catch {
-      // Pointer was already released.
-    }
-  };
-
   return (
     <section className="section section--white references-section" id="references">
       <div className="section-container">
@@ -142,10 +105,6 @@ function References() {
         className="references-carousel"
         ref={carouselRef}
         onScroll={updateScrollButtons}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={stopDragging}
-        onPointerLeave={stopDragging}
       >
         <div
           className="references-track"
@@ -155,7 +114,7 @@ function References() {
             <ReferenceCard
               key={reference.id}
               reference={reference}
-              onMoreClick={() => navigate(`/references?selected=${reference.id}`)}
+              onMoreClick={() => navigate(`/references/${reference.id}`)}
             />
           ))}
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./team-showcase.css";
 
 import {
@@ -166,6 +167,8 @@ function TeamCard({ member, index }) {
       style={{
         "--delay": `${index * 90}ms`,
         "--image-position": member.imagePosition || "center center",
+        "--image-scale": member.imageScale || 1,
+        "--image-url": `url(${member.image})`,
       }}
     >
       <div className="team-card__media">
@@ -222,6 +225,7 @@ function TeamCard({ member, index }) {
 
 function TeamShowcase() {
   const rootRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -404,9 +408,20 @@ function TeamShowcase() {
             Découvrez une organisation professionnelle portée par l’expertise,
             la rigueur et l’innovation.
           </p>
-          <a href="#contact" className="btn-main">
+          <button
+            type="button"
+            className="btn-main"
+            onClick={() =>
+              navigate("/", {
+                state: {
+                  scrollTo: "contact",
+                  offset: -90,
+                },
+              })
+            }
+          >
             Nous contacter
-          </a>
+          </button>
         </div>
       </div>
     </section>

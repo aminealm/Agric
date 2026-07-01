@@ -1,13 +1,18 @@
 import React from "react";
 import "./footer.css";
+import logo from "../../img/logo2.png";
 
 function Footer() {
   return (
     <footer className="main-footer" id="footer">
       <div className="footer-inner">
-        <div>
-          <strong>Agriconsulting Maroc SA</strong>
-          <p>Expertise agricole, territoriale et environnementale.</p>
+        <div className="footer-brand">
+          <img src={logo} alt="Agriconsulting Maroc SA" />
+
+          <div>
+            <strong>Agriconsulting Maroc SA</strong>
+            <p>Expertise agricole, territoriale et environnementale.</p>
+          </div>
         </div>
 
         <div className="copyright">
