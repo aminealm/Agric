@@ -71,14 +71,32 @@
   transform: none;
 }
 
+/* Tablet + mobile horizontal carousel */
 @media (max-width: 1100px) {
+  .references-section {
+    overflow: hidden;
+  }
+
   .references-carousel {
+    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 0 0 0 36px;
+
     scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y pinch-zoom;
+
+    /*
+      Important:
+      auto allows BOTH:
+      - horizontal swipe inside carousel
+      - vertical page scroll when finger starts on card
+    */
+    touch-action: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+
     scrollbar-width: none;
   }
 
@@ -93,30 +111,69 @@
     gap: 24px;
     transform: none !important;
     transition: none;
+    touch-action: auto;
   }
 
   .references-track .reference-card {
     flex: 0 0 62vw;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .reference-card {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    touch-action: auto;
+  }
+
+  .reference-card:active {
+    cursor: grabbing;
+  }
+
+  .reference-card,
+  .reference-card * {
+    touch-action: auto;
+  }
+
+  /*
+    This lets the swipe start from the card text area.
+    The parent carousel receives the gesture.
+  */
+  .reference-card-content,
+  .reference-card-content * {
+    pointer-events: none;
+  }
+
+  /*
+    Keep the button clickable.
+    With touch-action:auto, vertical scroll still works from the button too.
+  */
+  .reference-more {
+    pointer-events: auto;
+    touch-action: auto;
   }
 }
 
+/* Phone */
 @media (max-width: 700px) {
   .references-carousel {
-    padding: 0 0 0 26px;
+    padding: 0 0 0 20px;
   }
 
   .references-track {
-    gap: 18px;
+    gap: 16px;
   }
 
   .references-track .reference-card {
-    flex: 0 0 88vw;
+    flex: 0 0 86vw;
   }
 
   .references-actions {
-    margin-top: 34px;
-    justify-content: flex-start;
+    margin-top: 24px;
+    justify-content: center;
+    padding: 0 20px;
   }
 
   .references-actions .references-all-btn {
@@ -128,8 +185,21 @@
   }
 }
 
+/* Small phones */
 @media (max-width: 420px) {
+  .references-carousel {
+    padding-left: 16px;
+  }
+
+  .references-track {
+    gap: 14px;
+  }
+
   .references-track .reference-card {
-    flex: 0 0 90vw;
+    flex: 0 0 88vw;
+  }
+
+  .references-actions {
+    padding: 0 16px;
   }
 }
