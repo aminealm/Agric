@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import Typewriter from "typewriter-effect";
 import agric1 from "../../img/agric1.jpg";
@@ -6,38 +6,22 @@ import agric2 from "../../img/agric2.jpg";
 import agric3 from "../../img/agric3.jpg";
 import { Link } from "react-scroll";
 
-const slides = [
-  {
-    image: agric1,
-    alt: "D\u00e9veloppement agricole et territorial",
-    interval: 5000,
-  },
-  {
-    image: agric2,
-    alt: "Agriculture et d\u00e9veloppement rural",
-    interval: 3000,
-  },
-  {
-    image: agric3,
-    alt: "Environnement et ressources naturelles",
-    interval: 3000,
-  },
-];
-
 function Home() {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  const showSlide = (index) => {
-    setActiveSlide((index + slides.length) % slides.length);
-  };
-
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setActiveSlide((current) => (current + 1) % slides.length);
-    }, slides[activeSlide].interval);
+    const carousel = document.getElementById("carouselExampleCaptions");
+    const bootstrapCarousel = window.bootstrap?.Carousel;
 
-    return () => window.clearTimeout(timer);
-  }, [activeSlide]);
+    if (!carousel || !bootstrapCarousel) return undefined;
+
+    const instance = bootstrapCarousel.getOrCreateInstance(carousel, {
+      interval: 2500,
+      ride: "carousel",
+      touch: true,
+      wrap: true,
+    });
+
+    return () => instance.dispose();
+  }, []);
 
   return (
     <div className="container-fluide home" id="home">
@@ -73,37 +57,67 @@ function Home() {
         </Link>
       </div>
 
-      <div id="carouselExampleCaptions" className="carousel carousel-home slide">
+      <div
+        id="carouselExampleCaptions"
+        className="carousel carousel-home slide"
+        data-bs-ride="carousel"
+      >
         <div className="carousel-indicators">
-          {slides.map((slide, index) => (
-            <button
-              type="button"
-              className={index === activeSlide ? "active" : ""}
-              aria-current={index === activeSlide ? "true" : undefined}
-              aria-label={`Slide ${index + 1}`}
-              onClick={() => showSlide(index)}
-              key={slide.image}
-            />
-          ))}
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            className="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          />
+
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          />
+
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          />
         </div>
 
         <div className="carousel-inner">
-          {slides.map((slide, index) => (
-            <div
-              className={`carousel-item ${index === activeSlide ? "active" : ""}`}
-              data-bs-interval={slide.interval}
-              key={slide.image}
-            >
-              <img src={slide.image} className="d-block w-100" alt={slide.alt} />
-            </div>
-          ))}
+          <div className="carousel-item active" data-bs-interval="2500">
+            <img
+              src={agric1}
+              className="d-block w-100"
+              alt="D\u00e9veloppement agricole et territorial"
+            />
+          </div>
+
+          <div className="carousel-item" data-bs-interval="2500">
+            <img
+              src={agric2}
+              className="d-block w-100"
+              alt="Agriculture et d\u00e9veloppement rural"
+            />
+          </div>
+
+          <div className="carousel-item" data-bs-interval="2500">
+            <img
+              src={agric3}
+              className="d-block w-100"
+              alt="Environnement et ressources naturelles"
+            />
+          </div>
         </div>
 
         <button
           className="carousel-control-prev"
           type="button"
-          onClick={() => showSlide(activeSlide - 1)}
-          aria-label="Pr\u00e9c\u00e9dent"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
         >
           <span className="carousel-control-prev-icon" aria-hidden="true" />
           <span className="visually-hidden">{"Pr\u00e9c\u00e9dent"}</span>
@@ -112,8 +126,8 @@ function Home() {
         <button
           className="carousel-control-next"
           type="button"
-          onClick={() => showSlide(activeSlide + 1)}
-          aria-label="Suivant"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
         >
           <span className="carousel-control-next-icon" aria-hidden="true" />
           <span className="visually-hidden">Suivant</span>
