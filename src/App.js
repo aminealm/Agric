@@ -18,20 +18,21 @@ import TeamShowcase from "./components/Team/TeamShowcase";
 
 function ScrollReset() {
   const location = useLocation();
+  const scrollTarget = location.state?.scrollTo;
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
 
-    if (location.state?.scrollTo) return;
+    if (scrollTarget) return;
 
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "auto",
     });
-  }, [location.pathname]);
+  }, [location.pathname, scrollTarget]);
 
   return null;
 }

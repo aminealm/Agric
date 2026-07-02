@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Home.css";
 import Typewriter from "typewriter-effect";
 import agric1 from "../../img/agric1.jpg";
@@ -7,22 +7,6 @@ import agric3 from "../../img/agric3.jpg";
 import { Link } from "react-scroll";
 
 function Home() {
-  useEffect(() => {
-    const carousel = document.getElementById("carouselExampleCaptions");
-    const bootstrapCarousel = window.bootstrap?.Carousel;
-
-    if (!carousel || !bootstrapCarousel) return undefined;
-
-    const instance = bootstrapCarousel.getOrCreateInstance(carousel, {
-      interval: 2500,
-      ride: "carousel",
-      touch: true,
-      wrap: true,
-    });
-
-    return () => instance.dispose();
-  }, []);
-
   return (
     <div className="container-fluide home" id="home">
       <div className="home-content">
