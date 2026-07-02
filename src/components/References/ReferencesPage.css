@@ -119,14 +119,35 @@
   grid-template-columns: 1fr 1fr auto;
   gap: 16px;
   align-items: end;
-  margin-top: 20px;
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  max-height: 0;
+  margin-top: 0;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0);
   border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition:
+    max-height 0.38s ease,
+    margin-top 0.28s ease,
+    padding 0.28s ease,
+    opacity 0.25s ease,
+    transform 0.28s ease,
+    border-color 0.28s ease;
 }
 
+.references-filter-panel.is-open {
+  max-height: 150px;
+  margin-top: 20px;
+  padding: 18px;
+  border-color: rgba(255, 255, 255, 0.16);
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 .references-filter-panel label {
   display: grid;
   gap: 8px;
@@ -204,9 +225,16 @@
     padding-top: 96px;
   }
 
-  .references-page-toolbar,
+  .references-page-toolbar {
+    grid-template-columns: 1fr;
+  }
+
   .references-filter-panel {
     grid-template-columns: 1fr;
+  }
+
+  .references-filter-panel.is-open {
+    max-height: 340px;
   }
 
   .references-sort {

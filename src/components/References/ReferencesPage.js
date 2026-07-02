@@ -138,9 +138,7 @@ function ReferencesPage() {
               type="button"
               className={`references-filter-btn ${filtersOpen ? "active" : ""}`}
               onClick={() => setFiltersOpen((value) => !value)}
-            >
-              + Filtres
-            </button>
+            >{filtersOpen ? "- Filtres" : "+ Filtres"}</button>
 
             <label className="references-sort">
               <span>Trier par</span>
@@ -153,8 +151,10 @@ function ReferencesPage() {
             </label>
           </div>
 
-          {filtersOpen && (
-            <div className="references-filter-panel">
+          <div
+            className={`references-filter-panel ${filtersOpen ? "is-open" : ""}`}
+            aria-hidden={!filtersOpen}
+          >
               <label>
                 Secteur
                 <select value={sector} onChange={handleSectorChange}>
@@ -181,7 +181,6 @@ function ReferencesPage() {
                 Réinitialiser
               </button>
             </div>
-          )}
         </div>
       </section>
 
