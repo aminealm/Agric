@@ -15,7 +15,7 @@
 .references-carousel {
   width: 100%;
   overflow: hidden;
-  padding: 0 40px;
+  padding: 8px 40px 0;
 }
 
 .references-track {
@@ -81,7 +81,7 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 0 0 36px;
+    padding: 8px 0 0 36px;
 
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -159,7 +159,7 @@
 /* Phone */
 @media (max-width: 700px) {
   .references-carousel {
-    padding: 0 0 0 20px;
+    padding: 8px 0 0 20px;
   }
 
   .references-track {
@@ -189,6 +189,7 @@
 @media (max-width: 420px) {
   .references-carousel {
     padding-left: 16px;
+    padding-top: 8px;
   }
 
   .references-track {
