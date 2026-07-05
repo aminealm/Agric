@@ -158,8 +158,13 @@
 
 /* Phone */
 @media (max-width: 700px) {
+  .references-header {
+    margin-bottom: 36px;
+  }
+
   .references-carousel {
-    padding: 8px 0 0 20px;
+    padding: 10px 16px 0;
+    scroll-padding-inline: 16px;
   }
 
   .references-track {
@@ -167,13 +172,13 @@
   }
 
   .references-track .reference-card {
-    flex: 0 0 86vw;
+    flex: 0 0 calc(100vw - 32px);
   }
 
   .references-actions {
     margin-top: 24px;
     justify-content: center;
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .references-actions .references-all-btn {
@@ -188,8 +193,8 @@
 /* Small phones */
 @media (max-width: 420px) {
   .references-carousel {
-    padding-left: 16px;
-    padding-top: 8px;
+    padding: 10px 16px 0;
+    scroll-padding-inline: 16px;
   }
 
   .references-track {
@@ -197,7 +202,7 @@
   }
 
   .references-track .reference-card {
-    flex: 0 0 88vw;
+    flex: 0 0 calc(100vw - 32px);
   }
 
   .references-actions {

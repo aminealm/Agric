@@ -4,6 +4,7 @@
   min-height: 100vh;
   background: var(--bg-soft);
   color: var(--text-dark);
+  overflow-x: hidden;
 }
 
 .sectors-page-container {
@@ -385,8 +386,17 @@
 }
 
 @media (max-width: 700px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .sectors-page {
+    padding-top: 76px;
+  }
+
   .sectors-page-hero {
-    padding: 104px 0 54px;
+    padding: 34px 0 54px;
   }
 
   .sectors-page-hero__copy p {
@@ -419,6 +429,12 @@
 
   .sectors-page-grid {
     grid-template-columns: 1fr;
+  }
+
+  [data-sector-reveal],
+  [data-sector-reveal="left"],
+  [data-sector-reveal="right"] {
+    transform: translate3d(0, 24px, 0);
   }
 
   .sectors-page-card {
