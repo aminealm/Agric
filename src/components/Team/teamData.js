@@ -1,4 +1,4 @@
-﻿// src/components/TeamShowcase/teamData.js
+// src/components/TeamShowcase/teamData.js
 
 import lorenzoImg from "../../img/Lorenzo.png";
 import abdellahImg from "../../img/Abdellah.png";
