@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./team-showcase.css";
 
@@ -143,7 +143,6 @@ function AnimatedNumber({ value, suffix = "", duration = 1400 }) {
 }
 
 function TeamCard({ member, index }) {
-  const telNumber = member.numero ? member.numero.replace(/\s/g, "") : "";
 
   const socialLinks = [
     {
@@ -156,7 +155,7 @@ function TeamCard({ member, index }) {
       key: "twitter",
       href: member.twitter || member.x,
       label: "Twitter / X",
-      text: "𝕏",
+      text: "ð•",
     },
   ].filter((item) => item.href);
 
@@ -192,12 +191,6 @@ function TeamCard({ member, index }) {
             {member.email && (
               <a href={`mailto:${member.email}`} className="team-card__email">
                 {member.email}
-              </a>
-            )}
-
-            {member.numero && (
-              <a href={`tel:${telNumber}`} className="team-card__phone">
-                {member.numero}
               </a>
             )}
           </div>
@@ -353,7 +346,7 @@ function TeamShowcase() {
           <div className="team-stats" aria-label="Statistiques équipe">
             <div>
               <AnimatedNumber value={boardMembers.length} />
-              <span className="team-stats__label">Membres de l’équipe</span>
+              <span className="team-stats__label">Membres de l'équipe</span>
             </div>
 
             <div>
@@ -386,7 +379,7 @@ function TeamShowcase() {
           <div>
             <span className="eyebrow">Notre fonctionnement</span>
             <h3>
-              Une organisation structurée autour d’une équipe professionnelle et
+              Une organisation structurée autour d'une équipe professionnelle et
               complémentaire.
             </h3>
           </div>
@@ -405,8 +398,8 @@ function TeamShowcase() {
         <div className="team-cta" data-reveal>
           <h3>Une équipe engagée pour vos projets.</h3>
           <p>
-            Découvrez une organisation professionnelle portée par l’expertise,
-            la rigueur et l’innovation.
+            Découvrez une organisation professionnelle portée par l'expertise,
+            la rigueur et l'innovation.
           </p>
           <button
             type="button"
@@ -429,3 +422,4 @@ function TeamShowcase() {
 }
 
 export default TeamShowcase;
+
