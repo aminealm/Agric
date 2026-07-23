@@ -16,7 +16,7 @@ function Footer() {
         </div>
 
         <div className="copyright">
-          &copy; {new Date().getFullYear()} Agriconsulting SA. Tous droits
+          &copy; {new Date().getFullYear()} Agriconsulting Maroc SA. Tous droits
           réservés.
         </div>
       </div>
