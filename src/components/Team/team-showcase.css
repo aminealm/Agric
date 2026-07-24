@@ -129,6 +129,19 @@
   font-weight: 500;
 }
 
+.team-about-intro p a {
+  color: var(--team-accent);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.team-about-intro p a:hover {
+  color: var(--team-gold);
+}
+
 .team-about-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

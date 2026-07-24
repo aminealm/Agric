@@ -15,8 +15,19 @@ const onlinePortraits = {
 export const aboutIntro = {
   eyebrow: "À propos de nous",
   title: "Agriconsulting Maroc SA",
-  description:
-    "Agriconsulting Maroc SA est une société anonyme de droit marocain, fondée en 2002 à la suite d'un partenariat italo-marocain. Membre du Groupe Agriconsulting, en fusion avec le Groupe BF International, elle se positionne comme un acteur majeur du conseil, des études et de l'assistance technique au service du développement durable au Maroc et en Afrique.",
+  descriptionStart:
+    "Agriconsulting Maroc SA est une société anonyme de droit marocain, fondée en 2002 à la suite d'un partenariat italo-marocain. Membre du Groupe ",
+  europe: {
+    label: "Agriconsulting Europe",
+    url: "https://aesagroup.eu/",
+  },
+  descriptionMiddle: ", en fusion avec le Groupe ",
+  bfInternational: {
+    label: "BF International",
+    url: "https://bfint.co.uk",
+  },
+  descriptionEnd:
+    ", elle se positionne comme un acteur majeur du conseil, des études et de l'assistance technique au service du développement durable au Maroc et en Afrique.",
 };
 
 export const aboutCards = [

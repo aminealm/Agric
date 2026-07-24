@@ -318,7 +318,25 @@ function TeamShowcase() {
         <div className="team-about-intro" data-reveal>
           <span className="eyebrow">{aboutIntro.eyebrow}</span>
           <h1>{aboutIntro.title}</h1>
-          <p>{aboutIntro.description}</p>
+          <p>
+            {aboutIntro.descriptionStart}
+            <a
+              href={aboutIntro.europe.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {aboutIntro.europe.label}
+            </a>
+            {aboutIntro.descriptionMiddle}
+            <a
+              href={aboutIntro.bfInternational.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {aboutIntro.bfInternational.label}
+            </a>
+            {aboutIntro.descriptionEnd}
+          </p>
         </div>
 
         <div className="team-about-grid" data-reveal>
