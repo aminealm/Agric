@@ -2,7 +2,7 @@
 
 import lorenzoImg from "../../img/Lorenzo.png";
 import abdellahImg from "../../img/Abdellah.png";
-import asmaImg from "../../img/Asma.png";
+import asmaImg from "../../img/optimized/Asma.webp";
 import ilyasImg from "../../img/Ilyas.png";
 
 const onlinePortraits = {
@@ -59,7 +59,7 @@ export const boardMembers = [
     role: "Président Directeur Général",
     email: "L.GRAZIOLI@aesagroup.eu",
     image: onlinePortraits.lorenzo,
-    imagePosition: "center 32%",
+    imagePosition: "center 34%",
     imageScale: 1,
     quote:
       "Pilotage stratégique, vision globale et développement général de la société.",
@@ -81,7 +81,7 @@ export const boardMembers = [
     role: "Chargée de projets",
     email: "A.babakhouya@agriconsulting-ma.com",
     image: onlinePortraits.asma,
-    imagePosition: "center 34%",
+    imagePosition: "center 28%",
     imageScale: 1,
     quote:
       "Gestion, coordination et suivi opérationnel des projets avec rigueur et efficacité.",

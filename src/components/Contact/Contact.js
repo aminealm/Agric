@@ -71,10 +71,21 @@ function Contact() {
                   <p>+212 5 376 52 33</p>
                 </div>
               </div>
+
+              <div className="contact-detail">
+                <div className="contact-icon">
+                  <FaEnvelope />
+                </div>
+
+                <div>
+                  <h4>Email</h4>
+                  <p>info@agriconsulting-ma.com</p>
+                </div>
+              </div>
             </div>
 
             <a
-              href="mailto:contact@agriconsulting.ma"
+              href="mailto:info@agriconsulting-ma.com"
               className="btn-main contact-email-btn"
             >
               <FaEnvelope />

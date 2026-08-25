@@ -143,22 +143,6 @@ function AnimatedNumber({ value, suffix = "", duration = 1400 }) {
 }
 
 function TeamCard({ member, index }) {
-
-  const socialLinks = [
-    {
-      key: "linkedin",
-      href: member.linkedin,
-      label: "LinkedIn",
-      text: "in",
-    },
-    {
-      key: "twitter",
-      href: member.twitter || member.x,
-      label: "Twitter / X",
-      text: "ð•",
-    },
-  ].filter((item) => item.href);
-
   return (
     <article
       className="team-card"
@@ -185,32 +169,6 @@ function TeamCard({ member, index }) {
         <p className="team-card__role">{member.role}</p>
 
         <p className="team-card__quote">{member.quote}</p>
-
-        <div className="team-card__bottom">
-          <div className="team-card__contact">
-            {member.email && (
-              <a href={`mailto:${member.email}`} className="team-card__email">
-                {member.email}
-              </a>
-            )}
-          </div>
-
-          {socialLinks.length > 0 && (
-            <div className="team-card__socials" aria-label="Réseaux sociaux">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.key}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${member.name} - ${social.label}`}
-                >
-                  {social.text}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
     </article>
   );
