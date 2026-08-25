@@ -6,6 +6,7 @@ import {
   aboutIntro,
   aboutCards,
   aboutAmbition,
+  clienteleLogos,
   boardMembers,
   values,
   teamIntro,
@@ -370,6 +371,38 @@ function TeamShowcase() {
             ))}
           </div>
         </div>
+
+        <section
+          className="clientele-section"
+          data-reveal
+          aria-labelledby="clientele-title"
+        >
+          <div className="clientele-section__copy">
+            <span className="eyebrow">Nos clients</span>
+            <h2 id="clientele-title">
+              Agriconsulting Maroc accompagne une {" "}
+              <strong>clientèle diversifiée</strong>, des institutions nationales
+              aux organisations internationales, en mobilisant son expertise
+              pour <strong>créer un impact durable</strong>.
+            </h2>
+          </div>
+
+          <div className="clientele-slider" aria-label="Logos de clients et partenaires">
+            <div className="clientele-slider__track">
+              {[...clienteleLogos, ...clienteleLogos].map((logo, index) => (
+                <article
+                  className={`clientele-logo${logo.wide ? " clientele-logo--wide" : ""}${
+                    logo.tall ? " clientele-logo--tall" : ""
+                  }${logo.size ? ` clientele-logo--${logo.size}` : ""}`}
+                  key={`${logo.name}-${index}`}
+                  aria-hidden={index >= clienteleLogos.length ? "true" : undefined}
+                >
+                  <img src={logo.image} alt={logo.name} loading="lazy" />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <div className="team-cta" data-reveal>
           <h3>Une équipe engagée pour vos projets.</h3>

@@ -4,6 +4,14 @@ import lorenzoImg from "../../img/Lorenzo.png";
 import abdellahImg from "../../img/Abdellah.png";
 import asmaImg from "../../img/optimized/Asma.webp";
 import ilyasImg from "../../img/Ilyas.png";
+import clientLogo01 from "../../img/clients/client-logo-01.avif";
+import worldBankLogo from "../../img/clients/world-bank.png";
+import onssaLogo from "../../img/clients/onssa.png";
+import oncaLogo from "../../img/clients/onca.png";
+import afdLogo from "../../img/clients/afd.png";
+import economyFinanceLogo from "../../img/clients/ministere-economie-finances.png";
+import equipmentWaterLogo from "../../img/clients/ministere-equipement-eau.png";
+import mccMarocLogo from "../../img/clients/mcc-maroc.png";
 
 const onlinePortraits = {
   lorenzo: lorenzoImg,
@@ -51,6 +59,50 @@ export const aboutCards = [
 
 export const aboutAmbition =
   "Contribuer activement à un développement équilibré, responsable et porteur d'avenir pour les territoires.";
+
+export const clienteleLogos = [
+  {
+    name: "Partenaire institutionnel",
+    image: clientLogo01,
+  },
+  {
+    name: "The World Bank",
+    image: worldBankLogo,
+    wide: true,
+    size: "large",
+  },
+  {
+    name: "ONSSA",
+    image: onssaLogo,
+    size: "large",
+  },
+  {
+    name: "Office National du Conseil Agricole",
+    image: oncaLogo,
+    size: "large",
+  },
+  {
+    name: "Agence Française de Développement",
+    image: afdLogo,
+    wide: true,
+  },
+  {
+    name: "Ministère de l'Économie et des Finances",
+    image: economyFinanceLogo,
+    wide: true,
+    size: "large",
+  },
+  {
+    name: "Ministère de l'Équipement et de l'Eau",
+    image: equipmentWaterLogo,
+    tall: true,
+    size: "medium",
+  },
+  {
+    name: "MCC Maroc",
+    image: mccMarocLogo,
+  },
+];
 
 export const boardMembers = [
   {
