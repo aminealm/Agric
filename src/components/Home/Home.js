@@ -1,123 +1,208 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import {
+  BsChevronLeft,
+  BsChevronRight,
+  BsPauseFill,
+  BsPlayFill,
+} from "react-icons/bs";
 import "./Home.css";
-import Typewriter from "typewriter-effect";
-import agric1 from "../../img/agric1.jpg";
-import agric2 from "../../img/agric2.jpg";
-import agric3 from "../../img/agric3.jpg";
-import { Link } from "react-scroll";
+import agric1 from "../../img/optimized/agric1.webp";
+import agric2 from "../../img/optimized/agric2.webp";
+import agric3 from "../../img/optimized/agric3.webp";
+
+const slides = [
+  {
+    src: agric1,
+    alt: "Paysage agricole illustrant le développement territorial au Maroc",
+  },
+  {
+    src: agric2,
+    alt: "Cultures agricoles accompagnées par Agriconsulting Maroc",
+  },
+  {
+    src: agric3,
+    alt: "Ressources naturelles et environnement au service des territoires",
+  },
+];
+
+const heroPhrases = [
+  "Agriconsulting Maroc",
+  "L’expertise au service du développement agricole et territorial",
+];
+
+function useTypewriter() {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [typedText, setTypedText] = useState(heroPhrases[0]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      setTypedText(heroPhrases[0]);
+      return undefined;
+    }
+
+    const phrase = heroPhrases[phraseIndex];
+    let delay = isDeleting ? 28 : 58;
+
+    if (!isDeleting && typedText === phrase) delay = 1900;
+    if (isDeleting && typedText === "") delay = 320;
+
+    const timer = window.setTimeout(() => {
+      if (!isDeleting && typedText === phrase) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && typedText === "") {
+        setIsDeleting(false);
+        setPhraseIndex((current) => (current + 1) % heroPhrases.length);
+        return;
+      }
+
+      const nextLength = typedText.length + (isDeleting ? -1 : 1);
+      setTypedText(phrase.slice(0, nextLength));
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [isDeleting, phraseIndex, typedText]);
+
+  return typedText;
+}
 
 function Home() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const typedText = useTypewriter();
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion || isPaused || isInteracting) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, 2500);
+
+    return () => window.clearInterval(timer);
+  }, [isInteracting, isPaused]);
+
+  const changeSlide = (direction) => {
+    setActiveSlide(
+      (current) => (current + direction + slides.length) % slides.length
+    );
+  };
+
   return (
-    <div className="container-fluide home" id="home">
+    <section className="container-fluide home" id="home" aria-labelledby="home-title">
       <div className="home-content">
         <span className="home-eyebrow">Agriconsulting Maroc SA</span>
 
-        <h1>
-          <Typewriter
-            options={{
-              strings: [
-                "Agriconsulting Maroc",
-                "L\u2019expertise au service du d\u00e9veloppement agricole et territorial",
-              ],
-              autoStart: true,
-              loop: true,
-            }}
-          />
+        <h1 id="home-title">
+          <span className="visually-hidden">
+            Conseil agricole et développement territorial au Maroc et en Afrique
+          </span>
+          <span className="home-title__typewriter" aria-hidden="true">
+            {typedText}
+          </span>
         </h1>
 
         <p>
-          {"Agriconsulting Maroc accompagne les op\u00e9rateurs publics et priv\u00e9s dans leurs d\u00e9cisions strat\u00e9giques et op\u00e9rationnelles, au service du d\u00e9veloppement durable au Maroc et en Afrique."}
+          Agriconsulting Maroc accompagne les opérateurs publics et privés dans
+          leurs décisions stratégiques et opérationnelles, au service d’un
+          développement durable au Maroc et en Afrique.
         </p>
 
-        <Link
-          to="about"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={100}
-          className="btn-main home__cta"
-        >
-          {"D\u00e9couvrir plus"}
-        </Link>
+        <a href="#about" className="btn-main home__cta">
+          Découvrir plus
+        </a>
       </div>
 
       <div
-        id="carouselExampleCaptions"
-        className="carousel carousel-home slide"
-        data-bs-ride="carousel"
+        className="home-carousel"
+        role="region"
+        aria-roledescription="carrousel"
+        aria-label="Domaines d’intervention d’Agriconsulting Maroc"
+        onFocus={() => setIsInteracting(true)}
+        onBlur={() => setIsInteracting(false)}
       >
-        <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          />
-
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          />
-
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          />
+        <div className="home-carousel__slides">
+          {slides.map((slide, index) => (
+            <div
+              className={`home-carousel__slide${
+                index === activeSlide ? " is-active" : ""
+              }`}
+              aria-hidden={index !== activeSlide}
+              key={slide.src}
+            >
+              <img
+                src={slide.src}
+                alt={index === activeSlide ? slide.alt : ""}
+                width="1920"
+                height="1080"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                decoding="async"
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="2500">
-            <img
-              src={agric1}
-              className="d-block w-100"
-              alt="D\u00e9veloppement agricole et territorial"
+        <div className="home-carousel__indicators" aria-label="Choisir une image">
+          {slides.map((slide, index) => (
+            <button
+              type="button"
+              className={index === activeSlide ? "is-active" : ""}
+              onClick={() => setActiveSlide(index)}
+              aria-label={`Afficher l’image ${index + 1} sur ${slides.length}`}
+              aria-current={index === activeSlide ? "true" : undefined}
+              key={slide.src}
             />
-          </div>
+          ))}
 
-          <div className="carousel-item" data-bs-interval="2500">
-            <img
-              src={agric2}
-              className="d-block w-100"
-              alt="Agriculture et d\u00e9veloppement rural"
-            />
-          </div>
-
-          <div className="carousel-item" data-bs-interval="2500">
-            <img
-              src={agric3}
-              className="d-block w-100"
-              alt="Environnement et ressources naturelles"
-            />
-          </div>
+          <button
+            type="button"
+            className="home-carousel__pause"
+            onClick={() => setIsPaused((current) => !current)}
+            aria-label={
+              isPaused
+                ? "Reprendre le diaporama"
+                : "Mettre le diaporama en pause"
+            }
+          >
+            {isPaused ? (
+              <BsPlayFill aria-hidden="true" />
+            ) : (
+              <BsPauseFill aria-hidden="true" />
+            )}
+          </button>
         </div>
 
         <button
-          className="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev"
+          className="home-carousel__control home-carousel__control--previous"
+          onClick={() => changeSlide(-1)}
+          aria-label="Image précédente"
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="visually-hidden">{"Pr\u00e9c\u00e9dent"}</span>
+          <BsChevronLeft aria-hidden="true" />
         </button>
 
         <button
-          className="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next"
+          className="home-carousel__control home-carousel__control--next"
+          onClick={() => changeSlide(1)}
+          aria-label="Image suivante"
         >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="visually-hidden">Suivant</span>
+          <BsChevronRight aria-hidden="true" />
         </button>
       </div>
-    </div>
+    </section>
   );
 }
 

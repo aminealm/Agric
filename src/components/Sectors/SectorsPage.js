@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   BsArrowRight,
   BsCheck2Circle,
@@ -8,20 +8,16 @@ import {
 import { sectors } from "./Data";
 import "./SectorsPage.css";
 
+const sectorStats = [
+  { label: "Domaines", value: sectors.length },
+  { label: "Vision", value: "Durable" },
+];
+
 function SectorsPage() {
   const pageRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(() => new Set());
   const activeSector = sectors[activeIndex];
-
-  const sectorStats = useMemo(
-    () => [
-      { label: "Domaines", value: sectors.length },
-   
-      { label: "Vision", value: "Durable" },
-    ],
-    []
-  );
 
   const isVisible = (key) => visibleItems.has(key);
 
@@ -30,6 +26,20 @@ function SectorsPage() {
     if (!root) return undefined;
 
     const revealItems = root.querySelectorAll("[data-sector-reveal-key]");
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      setVisibleItems(
+        new Set(
+          Array.from(revealItems)
+            .map((item) => item.dataset.sectorRevealKey)
+            .filter(Boolean)
+        )
+      );
+      return undefined;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -61,16 +71,8 @@ function SectorsPage() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % sectors.length);
-    }, 4200);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
-    <main className="sectors-page" ref={pageRef}>
+    <main className="sectors-page" id="main-content" ref={pageRef}>
       <section className="sectors-page-hero">
         <div className="sectors-page-container sectors-page-hero__grid">
           <div
@@ -84,11 +86,11 @@ function SectorsPage() {
             <h1>Secteurs d'intervention</h1>
             <p>
               Une lecture transversale des territoires, des ressources et des
-              filieres pour accompagner les projets agricoles, ruraux,
+              filières pour accompagner les projets agricoles, ruraux,
               institutionnels et environnementaux.
             </p>
 
-            <div className="sectors-page-stats" aria-label="Resume des secteurs">
+            <div className="sectors-page-stats" aria-label="Résumé des secteurs">
               {sectorStats.map((item) => (
                 <div key={item.label}>
                   <strong>{item.value}</strong>
@@ -104,10 +106,16 @@ function SectorsPage() {
             }`}
             data-sector-reveal="right"
             data-sector-reveal-key="hero-visual"
-            aria-live="polite"
           >
             <div className="sectors-page-visual__image-wrap">
-              <img src={activeSector.image} alt={activeSector.title} />
+              <img
+                src={activeSector.image}
+                alt={activeSector.title}
+                width="1200"
+                height="800"
+                decoding="async"
+                fetchPriority="high"
+              />
             </div>
             <div className="sectors-page-visual__content">
               <span>{String(activeSector.id).padStart(2, "0")}</span>
@@ -150,14 +158,19 @@ function SectorsPage() {
                   } ${isVisible(revealKey) ? "is-visible" : ""}`}
                   key={sector.id}
                   onMouseEnter={() => setActiveIndex(index)}
-                  onFocus={() => setActiveIndex(index)}
-                  tabIndex={0}
                   data-sector-reveal={index % 2 === 0 ? "left" : "right"}
                   data-sector-reveal-key={revealKey}
                   style={{ "--delay": `${index * 80}ms` }}
                 >
                   <div className="sectors-page-card__media">
-                    <img src={sector.image} alt="" loading="lazy" />
+                    <img
+                      src={sector.image}
+                      alt=""
+                      width="1200"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
 
                   <div className="sectors-page-card__body">

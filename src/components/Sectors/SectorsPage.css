@@ -1,5 +1,3 @@
-@import "../_shared/design-system.css";
-
 .sectors-page {
   min-height: 100vh;
   background: var(--bg-soft);
@@ -51,7 +49,7 @@
   font-size: clamp(44px, 7vw, 86px);
   line-height: 0.96;
   font-weight: 900;
-  letter-spacing: -0.055em;
+  letter-spacing: 0;
 }
 
 .sectors-page-hero__copy p {
@@ -160,7 +158,7 @@
   font-size: clamp(30px, 4vw, 48px);
   line-height: 1.04;
   font-weight: 900;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
 }
 
 .sectors-page-visual__content p {
@@ -248,7 +246,6 @@
   overflow: hidden;
   background: var(--white);
   box-shadow: var(--shadow-soft);
-  outline: none;
   cursor: pointer;
   transition:
     transform var(--transition-smooth),
@@ -318,7 +315,7 @@
   font-size: 22px;
   line-height: 1.15;
   font-weight: 900;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
 }
 
 .sectors-page-card p {

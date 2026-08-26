@@ -1,5 +1,3 @@
-@import "../_shared/design-system.css";
-
 .about-sect {
   background:
     radial-gradient(circle at top right, rgba(24, 184, 90, 0.08), transparent 34%),
@@ -76,7 +74,7 @@
   color: var(--text-dark);
   font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .about-preview__cards p {

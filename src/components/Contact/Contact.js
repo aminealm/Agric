@@ -32,9 +32,9 @@ function Contact() {
               environnementaux ou institutionnels.
             </p>
 
-            <div className="contact-details">
+            <address className="contact-details">
               <div className="contact-detail">
-                <div className="contact-icon">
+                <div className="contact-icon" aria-hidden="true">
                   <FaMapMarkerAlt />
                 </div>
 
@@ -51,57 +51,65 @@ function Contact() {
               </div>
 
               <div className="contact-detail">
-                <div className="contact-icon">
+                <div className="contact-icon" aria-hidden="true">
                   <FaPhoneAlt />
                 </div>
 
                 <div>
                   <h4>Téléphone</h4>
-                  <p>+212 5 376 52 32</p>
+                  <p>
+                    <a href="tel:+21253765232">+212 5 376 52 32</a>
+                  </p>
                 </div>
               </div>
 
               <div className="contact-detail">
-                <div className="contact-icon">
+                <div className="contact-icon" aria-hidden="true">
                   <FaFax />
                 </div>
 
                 <div>
                   <h4>Fax</h4>
-                  <p>+212 5 376 52 33</p>
+                  <p>
+                    <a href="tel:+21253765233">+212 5 376 52 33</a>
+                  </p>
                 </div>
               </div>
 
               <div className="contact-detail">
-                <div className="contact-icon">
+                <div className="contact-icon" aria-hidden="true">
                   <FaEnvelope />
                 </div>
 
                 <div>
                   <h4>Email</h4>
-                  <p>info@agriconsulting-ma.com</p>
+                  <p>
+                    <a href="mailto:info@agriconsulting-ma.com">
+                      info@agriconsulting-ma.com
+                    </a>
+                  </p>
                 </div>
               </div>
-            </div>
+            </address>
 
             <a
               href="mailto:info@agriconsulting-ma.com"
               className="btn-main contact-email-btn"
             >
-              <FaEnvelope />
+              <FaEnvelope aria-hidden="true" />
               Envoyez un mail
-              <FaArrowRight className="contact-arrow" />
+              <FaArrowRight className="contact-arrow" aria-hidden="true" />
             </a>
           </div>
 
           <div className="contact-map-panel">
             <iframe
-              title="Agriconsulting Maroc Map"
+              title="Carte de localisation d’Agriconsulting Maroc à Rabat"
               src="https://maps.google.com/maps?q=33.9981346,-6.8469296&t=&z=17&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

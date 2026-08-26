@@ -20,13 +20,13 @@ function About() {
 
           <Link to="/about" className="btn-main about-preview__button">
             En savoir plus
-            <BsArrowRight size={20} />
+            <BsArrowRight size={20} aria-hidden="true" />
           </Link>
         </div>
 
         <div className="about-preview__cards">
           <article className="ui-card">
-            <BsCheck2All size={25} />
+            <BsCheck2All size={25} aria-hidden="true" />
             <h3>Conseil & études</h3>
             <p>
               Des solutions adaptées aux enjeux agricoles, ruraux et
@@ -35,7 +35,7 @@ function About() {
           </article>
 
           <article className="ui-card">
-            <BsCheck2All size={25} />
+            <BsCheck2All size={25} aria-hidden="true" />
             <h3>Expertise terrain</h3>
             <p>
               Une connaissance locale renforcée par un savoir-faire
@@ -44,7 +44,7 @@ function About() {
           </article>
 
           <article className="ui-card">
-            <BsCheck2All size={25} />
+            <BsCheck2All size={25} aria-hidden="true" />
             <h3>Impact durable</h3>
             <p>
               Une approche responsable, inclusive et orientée vers les

@@ -26,26 +26,26 @@ function ReferenceDetailPage() {
 
   if (!reference) {
     return (
-      <main className="reference-detail-page">
+      <main className="reference-detail-page" id="main-content">
         <section className="reference-detail-hero reference-detail-hero--empty">
           <div className="reference-detail-container">
             <nav className="reference-detail-breadcrumb" aria-label="Fil d'ariane">
               <Link to="/references">
                 <BsArrowUpRight aria-hidden="true" />
-                References
+                Références
               </Link>
               <span>Introuvable</span>
             </nav>
 
-            <h1>Reference introuvable</h1>
+            <h1>Référence introuvable</h1>
             <p className="reference-detail-lead">
-              Cette reference n'existe pas ou n'est plus disponible dans la
+              Cette référence n’existe pas ou n’est plus disponible dans la
               liste actuelle.
             </p>
 
             <Link className="reference-detail-back" to="/references">
               <BsArrowLeft aria-hidden="true" />
-              Retour aux references
+              Retour aux références
             </Link>
           </div>
         </section>
@@ -54,13 +54,13 @@ function ReferenceDetailPage() {
   }
 
   return (
-    <main className="reference-detail-page">
+    <main className="reference-detail-page" id="main-content">
       <section className="reference-detail-hero">
         <div className="reference-detail-container">
           <nav className="reference-detail-breadcrumb" aria-label="Fil d'ariane">
             <Link to="/references">
               <BsArrowUpRight aria-hidden="true" />
-              References
+              Références
             </Link>
             <span>
               <BsArrowUpRight aria-hidden="true" />
@@ -70,7 +70,7 @@ function ReferenceDetailPage() {
 
           <h1>{reference.title}</h1>
 
-          <div className="reference-detail-meta" aria-label="Details de la reference">
+          <div className="reference-detail-meta" aria-label="Détails de la référence">
             {detailItems.map(({ key, label, icon: Icon }) => (
               <div className="reference-detail-meta-item" key={key}>
                 <Icon aria-hidden="true" />
@@ -86,17 +86,17 @@ function ReferenceDetailPage() {
         <div className="reference-detail-container reference-detail-grid">
           <article className="reference-detail-story">
             <span className="section-eyebrow">Mission</span>
-            <h2>Informations de reference</h2>
+            <h2>Informations de référence</h2>
             <p>
-              {reference.client} a mobilise cette mission dans le secteur{" "}
+              {reference.client} a mobilisé cette mission dans le secteur{" "}
               <strong>{reference.sector}</strong>, avec un financement{" "}
-              <strong>{reference.funding}</strong>. La reference couvre une
-              intervention en {reference.country}, sur la periode{" "}
+              <strong>{reference.funding}</strong>. La référence couvre une
+              intervention en {reference.country}, sur la période{" "}
               {reference.duration}.
             </p>
           </article>
 
-          <aside className="reference-detail-panel ui-card" aria-label="Fiche reference">
+          <aside className="reference-detail-panel ui-card" aria-label="Fiche référence">
             <div className="reference-detail-panel-header">
               <span>Fiche projet</span>
               <strong>{reference.year}</strong>

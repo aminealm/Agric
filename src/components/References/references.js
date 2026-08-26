@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { references } from "./Data";
 import ReferenceCard from "./ReferenceCard";
 import "./references.css";
 
 function References() {
-  const navigate = useNavigate();
   const landingReferences = references.slice(0, 6);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,12 +14,13 @@ function References() {
   });
 
   const carouselRef = useRef(null);
+  const [isScrollable, setIsScrollable] = useState(
+    () => window.innerWidth <= 1100
+  );
   const visibleCards = 3;
   const maxIndex = Math.max(landingReferences.length - visibleCards, 0);
 
-  const isScrollableLayout = () => window.innerWidth <= 1100;
-
-  const updateScrollButtons = () => {
+  const updateScrollButtons = useCallback(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
@@ -28,23 +28,32 @@ function References() {
     const atEnd =
       carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 2;
 
-    setScrollState({ atStart, atEnd });
-  };
-
-  useEffect(() => {
-    updateScrollButtons();
-    window.addEventListener("resize", updateScrollButtons);
-
-    return () => {
-      window.removeEventListener("resize", updateScrollButtons);
-    };
+    setScrollState((current) =>
+      current.atStart === atStart && current.atEnd === atEnd
+        ? current
+        : { atStart, atEnd }
+    );
   }, []);
 
-  const isPreviousDisabled = isScrollableLayout()
+  useEffect(() => {
+    const handleResize = () => {
+      setIsScrollable(window.innerWidth <= 1100);
+      updateScrollButtons();
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [updateScrollButtons]);
+
+  const isPreviousDisabled = isScrollable
     ? scrollState.atStart
     : currentIndex === 0;
 
-  const isNextDisabled = isScrollableLayout()
+  const isNextDisabled = isScrollable
     ? scrollState.atEnd
     : currentIndex === maxIndex;
 
@@ -69,7 +78,7 @@ function References() {
   const nextReference = () => {
     if (isNextDisabled) return;
 
-    if (isScrollableLayout()) {
+    if (isScrollable) {
       scrollCarousel(1);
       return;
     }
@@ -80,7 +89,7 @@ function References() {
   const previousReference = () => {
     if (isPreviousDisabled) return;
 
-    if (isScrollableLayout()) {
+    if (isScrollable) {
       scrollCarousel(-1);
       return;
     }
@@ -114,20 +123,19 @@ function References() {
             <ReferenceCard
               key={reference.id}
               reference={reference}
-              onMoreClick={() => navigate(`/references/${reference.id}`)}
+              to={`/references/${reference.id}`}
             />
           ))}
         </div>
       </div>
 
       <div className="references-actions section-container">
-        <button
-          type="button"
+        <Link
           className="btn-secondary references-all-btn"
-          onClick={() => navigate("/references")}
+          to="/references"
         >
           ↗ Voir toutes les références
-        </button>
+        </Link>
       </div>
 
       <div className="references-controls section-container">

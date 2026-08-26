@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function scrollToPageTop(behavior = "auto") {
-  window.scrollTo({ top: 0, behavior });
-}
-
 export function useNavbarNavigation({ onNavigate, sectionOffset = -90 } = {}) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,52 +49,61 @@ export function useNavbarNavigation({ onNavigate, sectionOffset = -90 } = {}) {
     [location.pathname, navigate, onNavigate, sectionOffset]
   );
 
-  const goToRouteTop = useCallback(
-    (pathname) => {
-      onNavigate?.();
-
-      if (location.pathname === pathname) {
-        scrollToPageTop("smooth");
+  const handleHomeClick = useCallback(
+    (event) => {
+      if (location.pathname === "/") {
+        event.preventDefault();
+        scrollToSection("home", sectionOffset);
         return;
       }
 
-      navigate(pathname);
-
-      setTimeout(() => {
-        scrollToPageTop("auto");
-      }, 0);
+      onNavigate?.();
     },
-    [location.pathname, navigate, onNavigate]
+    [location.pathname, onNavigate, scrollToSection, sectionOffset]
   );
 
   const navItems = useMemo(
     () => [
       {
         label: "À propos de nous",
-        onClick: () => goToRouteTop("/about"),
+        to: "/about",
+        onClick: onNavigate,
         active: location.pathname === "/about",
       },
       {
         label: "Secteurs",
-        onClick: () => goToRouteTop("/secteurs"),
+        to: "/secteurs",
+        onClick: onNavigate,
         active: location.pathname === "/secteurs",
       },
       {
         label: "Références",
-        onClick: () => goToRouteTop("/references"),
-        active: location.pathname === "/references",
+        to: "/references",
+        onClick: onNavigate,
+        active: location.pathname.startsWith("/references"),
       },
       {
         label: "Contact",
-        onClick: () => scrollToSection("contact", -90),
+        to: "/",
+        state: { scrollTo: "contact", offset: -90 },
+        onClick: (event) => {
+          if (location.pathname === "/") {
+            event.preventDefault();
+            scrollToSection("contact", -90);
+            return;
+          }
+
+          onNavigate?.();
+        },
       },
     ],
-    [goToRouteTop, location.pathname, scrollToSection]
+    [location.pathname, onNavigate, scrollToSection]
   );
 
   return {
     isInnerPage: location.pathname !== "/",
     isScrolled,
+    handleHomeClick,
     navItems,
     scrollToSection,
   };

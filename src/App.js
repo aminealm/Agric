@@ -1,20 +1,28 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 import Navbar from "./components/navbar/Navbar";
 import NavbarMobile from "./components/navbar/NavbarMobile";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
-import ScrollToTop from "react-scroll-to-top";
 import Footer from "./components/footer/Footer";
 import Contact from "./components/Contact/Contact";
 import References from "./components/References/references";
-import ReferenceDetailPage from "./components/References/ReferenceDetailPage";
-import ReferencesPage from "./components/References/ReferencesPage";
 import Sectors from "./components/Sectors/Sectors";
-import SectorsPage from "./components/Sectors/SectorsPage";
-import TeamShowcase from "./components/Team/TeamShowcase";
+import Seo from "./components/Seo/Seo";
+import ScrollToTopButton from "./components/_shared/ScrollToTopButton";
+import LoadingState from "./components/_shared/LoadingState";
+
+const TeamShowcase = lazy(() => import("./components/Team/TeamShowcase"));
+const ReferencesPage = lazy(() =>
+  import("./components/References/ReferencesPage")
+);
+const ReferenceDetailPage = lazy(() =>
+  import("./components/References/ReferenceDetailPage")
+);
+const SectorsPage = lazy(() => import("./components/Sectors/SectorsPage"));
+const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 function ScrollReset() {
   const location = useLocation();
@@ -64,44 +72,45 @@ function LandingPage() {
   }, [location]);
 
   return (
-    <>
+    <main id="main-content">
       <Home />
       <About />
       <Sectors />
       <References />
       <Contact />
-    </>
+    </main>
   );
+}
+
+function RouteFallback() {
+  return <LoadingState />;
 }
 
 function App() {
   return (
     <BrowserRouter>
       <ScrollReset />
+      <Seo />
+
+      <a className="skip-link" href="#main-content">
+        Aller au contenu principal
+      </a>
 
       <Navbar />
       <NavbarMobile />
 
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<TeamShowcase />} />
-        <Route path="/references" element={<ReferencesPage />} />
-        <Route path="/references/:id" element={<ReferenceDetailPage />} />
-        <Route path="/secteurs" element={<SectorsPage />} />
-      </Routes>
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<TeamShowcase />} />
+          <Route path="/references" element={<ReferencesPage />} />
+          <Route path="/references/:id" element={<ReferenceDetailPage />} />
+          <Route path="/secteurs" element={<SectorsPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
 
-      <ScrollToTop
-        smooth
-        className="scroll"
-        color="white"
-        height="20"
-        width="20"
-        style={{
-          borderRadius: "50%",
-          zIndex: 999999,
-          backgroundColor: "var(--green-main)",
-        }}
-      />
+      <ScrollToTopButton />
 
       <Footer />
     </BrowserRouter>

@@ -1,12 +1,9 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { references } from "./Data";
 import ReferenceCard from "./ReferenceCard";
 import "./ReferencesPage.css";
 
 function ReferencesPage() {
-  const navigate = useNavigate();
-
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState("all");
   const [country, setCountry] = useState("all");
@@ -118,7 +115,7 @@ function ReferencesPage() {
   };
 
   return (
-    <main className="references-page">
+    <main className="references-page" id="main-content">
       <section className="references-page-hero">
         <div className="section-container--wide references-page-hero-content">
           <span className="section-eyebrow">Nos réalisations</span>
@@ -126,6 +123,7 @@ function ReferencesPage() {
 
           <div className="references-page-toolbar">
             <label className="references-search" aria-label="Rechercher une référence">
+              <span className="visually-hidden">Rechercher une référence</span>
               <input
                 type="search"
                 value={search}
@@ -138,6 +136,8 @@ function ReferencesPage() {
               type="button"
               className={`references-filter-btn ${filtersOpen ? "active" : ""}`}
               onClick={() => setFiltersOpen((value) => !value)}
+              aria-expanded={filtersOpen}
+              aria-controls="references-filter-panel"
             >{filtersOpen ? "- Filtres" : "+ Filtres"}</button>
 
             <label className="references-sort">
@@ -151,10 +151,11 @@ function ReferencesPage() {
             </label>
           </div>
 
-          <div
-            className={`references-filter-panel ${filtersOpen ? "is-open" : ""}`}
-            aria-hidden={!filtersOpen}
-          >
+          {filtersOpen && (
+            <div
+              className="references-filter-panel is-open"
+              id="references-filter-panel"
+            >
               <label>
                 Secteur
                 <select value={sector} onChange={handleSectorChange}>
@@ -181,12 +182,14 @@ function ReferencesPage() {
                 Réinitialiser
               </button>
             </div>
+          )}
         </div>
       </section>
 
       <section className="references-page-results">
         <div className="section-container--wide">
-          <p className="references-results-count">
+          <h2 className="visually-hidden">Liste des références</h2>
+          <p className="references-results-count" aria-live="polite">
             {filteredReferences.length} résultat
             {filteredReferences.length > 1 ? "s" : ""}
           </p>
@@ -198,7 +201,7 @@ function ReferencesPage() {
                   <ReferenceCard
                     key={reference.id}
                     reference={reference}
-                    onMoreClick={() => navigate(`/references/${reference.id}`)}
+                    to={`/references/${reference.id}`}
                   />
                 ))}
               </div>

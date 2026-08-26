@@ -1,13 +1,5 @@
 @import "./components/_shared/design-system.css";
 
-.scroll {
-  width: 50px;
-}
-
-.scroll:hover {
-  background-color: var(--green-dark) !important;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }

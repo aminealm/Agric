@@ -1,9 +1,9 @@
 // src/components/TeamShowcase/teamData.js
 
-import lorenzoImg from "../../img/Lorenzo.png";
-import abdellahImg from "../../img/Abdellah.png";
+import lorenzoImg from "../../img/optimized/Lorenzo.webp";
+import abdellahImg from "../../img/optimized/Abdellah.webp";
 import asmaImg from "../../img/optimized/Asma.webp";
-import ilyasImg from "../../img/Ilyas.png";
+import ilyasImg from "../../img/optimized/Ilyas.webp";
 import clientLogo01 from "../../img/clients/client-logo-01.avif";
 import worldBankLogo from "../../img/clients/world-bank.png";
 import onssaLogo from "../../img/clients/onssa.png";

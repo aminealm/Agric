@@ -1,6 +1,7 @@
 import "./ReferenceCard.css";
+import { Link } from "react-router-dom";
 
-function ReferenceCard({ reference, onMoreClick }) {
+function ReferenceCard({ reference, to }) {
   return (
     <article className="reference-card ui-card">
       <div className="reference-card-content">
@@ -21,9 +22,13 @@ function ReferenceCard({ reference, onMoreClick }) {
         </div>
       </div>
 
-      <button type="button" className="reference-more" onClick={onMoreClick}>
+      <Link
+        className="reference-more"
+        to={to}
+        aria-label={`Voir la référence : ${reference.title}`}
+      >
         Voir plus
-      </button>
+      </Link>
     </article>
   );
 }

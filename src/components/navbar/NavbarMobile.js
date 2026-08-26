@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./navbarmobile.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
@@ -9,13 +10,29 @@ function NavbarMobile() {
   const [open, setOpen] = useState(false);
   const closeNavbar = useCallback(() => setOpen(false), []);
 
-  const { isInnerPage, isScrolled, navItems, scrollToSection } =
+  const { handleHomeClick, isInnerPage, isScrolled, navItems } =
     useNavbarNavigation({
       onNavigate: closeNavbar,
       sectionOffset: -80,
     });
 
   const isSolidNavbar = isScrolled || isInnerPage || open;
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.body.classList.add("mobile-menu-open");
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
 
   return (
     <div className="responsive-mobile-view">
@@ -24,22 +41,29 @@ function NavbarMobile() {
           isSolidNavbar ? "mobile-view-header--solid" : ""
         }`}
       >
-        <button
-          type="button"
+        <Link
+          to="/"
           className="mobile-logo-btn"
-          onClick={() => scrollToSection("home", -80)}
+          onClick={handleHomeClick}
           aria-label="Aller à l'accueil"
         >
-          <img src={img} alt="Agriconsulting Maroc" className="mobile-logo" />
-        </button>
+          <img
+            src={img}
+            alt=""
+            className="mobile-logo"
+            width="1080"
+            height="480"
+          />
+        </Link>
 
         <div className="mobile-actions">
           <button
             type="button"
             className="mobile-menu-btn"
             onClick={() => setOpen((value) => !value)}
-            aria-label="Ouvrir ou fermer le menu"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
             {open ? <IoClose size={30} /> : <GiHamburgerMenu size={27} />}
           </button>
@@ -47,26 +71,32 @@ function NavbarMobile() {
       </div>
 
       {open && (
-        <div className="mobile-nav">
+        <nav
+          className="mobile-nav"
+          id="mobile-navigation"
+          aria-label="Navigation principale"
+        >
           <ul>
             {navItems.map((item) => (
               <li className="nav-item" key={item.label}>
-                <button
-                  type="button"
+                <Link
+                  to={item.to}
+                  state={item.state}
                   className={`mobile-nav-link-btn ${
                     item.active ? "active" : ""
                   }`}
                   onClick={item.onClick}
+                  aria-current={item.active ? "page" : undefined}
                 >
                   <span className="mobile-nav-link-arrow" aria-hidden="true">
                     ↗
                   </span>
                   <span>{item.label}</span>
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
       )}
     </div>
   );

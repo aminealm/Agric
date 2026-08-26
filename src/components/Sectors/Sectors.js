@@ -19,20 +19,21 @@ function Sectors() {
             <article
               className="sector-item"
               key={sector.id}
-              style={{ "--sector-image": `url(${sector.image})` }}
             >
+              <img
+                className="sector-item__image"
+                src={sector.image}
+                alt=""
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+
               <div className="sector-content">
                 <h3>{sector.title}</h3>
                 <p>{sector.description}</p>
               </div>
-
-              {/* <button
-                type="button"
-                className="sector-arrow"
-                aria-label={`Voir le secteur ${sector.title}`}
-              >
-                ↗
-              </button> */}
             </article>
           ))}
         </div>

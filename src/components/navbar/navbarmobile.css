@@ -1,7 +1,9 @@
-@import "../_shared/design-system.css";
-
 .responsive-mobile-view {
   display: none;
+}
+
+body.mobile-menu-open {
+  overflow: hidden;
 }
 
 @media (max-width: 1120px) {
@@ -63,6 +65,9 @@
   .mobile-logo-btn {
     display: flex;
     align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    text-decoration: none;
   }
 
   .mobile-logo {
@@ -97,8 +102,8 @@
   }
 
   .mobile-menu-btn {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,7 +162,6 @@
     align-items: center;
     gap: 8px;
     border: none;
-    outline: none;
     margin: 0;
     color: var(--text-dark);
     background: transparent;

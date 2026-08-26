@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./team-showcase.css";
 
 import {
@@ -57,6 +57,12 @@ function AnimatedNumber({ value, suffix = "", duration = 1400 }) {
     const element = numberRef.current;
     if (!element) return undefined;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayValue(value);
+      setIsVisible(true);
+      return undefined;
+    }
+
     const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
     const stopAnimation = () => {
@@ -98,10 +104,7 @@ function AnimatedNumber({ value, suffix = "", duration = 1400 }) {
         if (entry.isIntersecting) {
           setIsVisible(true);
           startAnimation();
-        } else {
-          setIsVisible(false);
-          setDisplayValue(0);
-          stopAnimation();
+          observer.unobserve(element);
         }
       },
       { threshold: 0.4 }
@@ -160,6 +163,9 @@ function TeamCard({ member, index }) {
           src={member.image}
           alt={`${member.name} - ${member.role}`}
           loading="lazy"
+          decoding="async"
+          width="900"
+          height="900"
         />
       </div>
 
@@ -177,7 +183,6 @@ function TeamCard({ member, index }) {
 
 function TeamShowcase() {
   const rootRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -185,13 +190,21 @@ function TeamShowcase() {
 
     const revealItems = root.querySelectorAll("[data-reveal]");
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-          } else {
-            entry.target.classList.remove("is-visible");
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -230,10 +243,14 @@ function TeamShowcase() {
       card.style.setProperty("--my", "50%");
     };
 
-    cards.forEach((card) => {
-      card.addEventListener("pointermove", handlePointerMove);
-      card.addEventListener("pointerleave", resetTilt);
-    });
+    const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+    if (supportsFinePointer) {
+      cards.forEach((card) => {
+        card.addEventListener("pointermove", handlePointerMove);
+        card.addEventListener("pointerleave", resetTilt);
+      });
+    }
 
     const handlePageMouseMove = (event) => {
       const rect = root.getBoundingClientRect();
@@ -245,22 +262,26 @@ function TeamShowcase() {
       root.style.setProperty("--page-y", y.toFixed(3));
     };
 
-    root.addEventListener("pointermove", handlePageMouseMove);
+    if (supportsFinePointer) {
+      root.addEventListener("pointermove", handlePageMouseMove);
+    }
 
     return () => {
       observer.disconnect();
 
-      cards.forEach((card) => {
-        card.removeEventListener("pointermove", handlePointerMove);
-        card.removeEventListener("pointerleave", resetTilt);
-      });
+      if (supportsFinePointer) {
+        cards.forEach((card) => {
+          card.removeEventListener("pointermove", handlePointerMove);
+          card.removeEventListener("pointerleave", resetTilt);
+        });
 
-      root.removeEventListener("pointermove", handlePageMouseMove);
+        root.removeEventListener("pointermove", handlePageMouseMove);
+      }
     };
   }, []);
 
   return (
-    <section className="team-showcase" id="about-page" ref={rootRef}>
+    <main className="team-showcase" id="main-content" ref={rootRef}>
       <div className="team-showcase__noise" aria-hidden="true" />
 
       <div
@@ -282,7 +303,7 @@ function TeamShowcase() {
             <a
               href={aboutIntro.europe.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               {aboutIntro.europe.label}
             </a>
@@ -290,7 +311,7 @@ function TeamShowcase() {
             <a
               href={aboutIntro.bfInternational.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               {aboutIntro.bfInternational.label}
             </a>
@@ -302,7 +323,7 @@ function TeamShowcase() {
           {aboutCards.map((item, index) => (
             <article className="team-about-card" key={item.title}>
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item.title}</h3>
+              <h2>{item.title}</h2>
               <p>{item.text}</p>
             </article>
           ))}
@@ -328,7 +349,7 @@ function TeamShowcase() {
 
             <div>
               <AnimatedNumber value={boardMembers.length} />
-              <span className="team-stats__label">Contacts directs</span>
+              <span className="team-stats__label">Profils présentés</span>
             </div>
 
             <div>
@@ -355,17 +376,17 @@ function TeamShowcase() {
         <div className="team-principles" data-reveal>
           <div>
             <span className="eyebrow">Notre fonctionnement</span>
-            <h3>
+            <h2>
               Une organisation structurée autour d'une équipe professionnelle et
               complémentaire.
-            </h3>
+            </h2>
           </div>
 
           <div className="principles-grid">
             {principles.map((item) => (
               <article key={item.number}>
                 <span>{item.number}</span>
-                <h4>{item.title}</h4>
+                <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </article>
             ))}
@@ -385,6 +406,7 @@ function TeamShowcase() {
               aux organisations internationales, en mobilisant son expertise
               pour <strong>créer un impact durable</strong>.
             </h2>
+
           </div>
 
           <div className="clientele-slider" aria-label="Logos de clients et partenaires">
@@ -397,7 +419,14 @@ function TeamShowcase() {
                   key={`${logo.name}-${index}`}
                   aria-hidden={index >= clienteleLogos.length ? "true" : undefined}
                 >
-                  <img src={logo.image} alt={logo.name} loading="lazy" />
+                  <img
+                    src={logo.image}
+                    alt={index < clienteleLogos.length ? logo.name : ""}
+                    width="280"
+                    height="118"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </article>
               ))}
             </div>
@@ -405,28 +434,21 @@ function TeamShowcase() {
         </section>
 
         <div className="team-cta" data-reveal>
-          <h3>Une équipe engagée pour vos projets.</h3>
+          <h2>Une équipe engagée pour vos projets.</h2>
           <p>
             Découvrez une organisation professionnelle portée par l'expertise,
             la rigueur et l'innovation.
           </p>
-          <button
-            type="button"
+          <Link
+            to="/"
+            state={{ scrollTo: "contact", offset: -90 }}
             className="btn-main"
-            onClick={() =>
-              navigate("/", {
-                state: {
-                  scrollTo: "contact",
-                  offset: -90,
-                },
-              })
-            }
           >
             Nous contacter
-          </button>
+          </Link>
         </div>
       </div>
-    </section>
+    </main>
   );
 }
 

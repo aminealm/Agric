@@ -7,7 +7,14 @@ function Footer() {
     <footer className="main-footer" id="footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <img src={logo} alt="Agriconsulting Maroc SA" />
+          <img
+            src={logo}
+            alt=""
+            width="1080"
+            height="480"
+            loading="lazy"
+            decoding="async"
+          />
 
           <div>
             <strong>Agriconsulting Maroc SA</strong>
