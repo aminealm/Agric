@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./contact.css";
 import {
   FaMapMarkerAlt,
@@ -7,8 +7,49 @@ import {
   FaEnvelope,
   FaArrowRight,
 } from "react-icons/fa";
+import { getContactInfo } from "../../services/contentApi";
+
+const defaultContact = {
+  companyName: "Agriconsulting Maroc SA",
+  addressLine1: "24, Avenue de France",
+  addressLine2: "App 10 (3ème étage), Agdal - Rabat, Maroc",
+  phone: "+212 5 376 52 32",
+  fax: "+212 5 376 52 33",
+  email: "info@agriconsulting-ma.com",
+  latitude: "33.9981346",
+  longitude: "-6.8469296",
+};
+
+function toTelHref(value) {
+  return `tel:${String(value || "").replace(/[^+\d]/g, "")}`;
+}
 
 function Contact() {
+  const [contact, setContact] = useState(defaultContact);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getContactInfo()
+      .then((item) => {
+        if (isMounted) setContact({ ...defaultContact, ...item });
+      })
+      .catch(() => {
+        // Keep bundled contact details visible if the API is unavailable.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const mapSrc = useMemo(() => {
+    const latitude = contact.latitude || defaultContact.latitude;
+    const longitude = contact.longitude || defaultContact.longitude;
+
+    return `https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=17&ie=UTF8&iwloc=&output=embed`;
+  }, [contact.latitude, contact.longitude]);
+
   return (
     <section id="contact" className="section contact-section">
       <div className="section-container contact-container">
@@ -23,7 +64,7 @@ function Contact() {
 
         <div className="contact-card ui-card">
           <div className="contact-info-panel">
-            <span className="contact-small-title">Agriconsulting Maroc SA</span>
+            <span className="contact-small-title">{contact.companyName}</span>
 
             <h3>Nous sommes à votre écoute</h3>
 
@@ -41,11 +82,11 @@ function Contact() {
                 <div>
                   <h4>Adresse</h4>
                   <p>
-                    Agriconsulting Maroc SA
+                    {contact.companyName}
                     <br />
-                    24, Avenue de France
+                    {contact.addressLine1}
                     <br />
-                    App 10 (3ème étage), Agdal - Rabat, Maroc
+                    {contact.addressLine2}
                   </p>
                 </div>
               </div>
@@ -58,7 +99,7 @@ function Contact() {
                 <div>
                   <h4>Téléphone</h4>
                   <p>
-                    <a href="tel:+21253765232">+212 5 376 52 32</a>
+                    <a href={toTelHref(contact.phone)}>{contact.phone}</a>
                   </p>
                 </div>
               </div>
@@ -71,7 +112,7 @@ function Contact() {
                 <div>
                   <h4>Fax</h4>
                   <p>
-                    <a href="tel:+21253765233">+212 5 376 52 33</a>
+                    <a href={toTelHref(contact.fax)}>{contact.fax}</a>
                   </p>
                 </div>
               </div>
@@ -84,16 +125,14 @@ function Contact() {
                 <div>
                   <h4>Email</h4>
                   <p>
-                    <a href="mailto:info@agriconsulting-ma.com">
-                      info@agriconsulting-ma.com
-                    </a>
+                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
                   </p>
                 </div>
               </div>
             </address>
 
             <a
-              href="mailto:info@agriconsulting-ma.com"
+              href={`mailto:${contact.email}`}
               className="btn-main contact-email-btn"
             >
               <FaEnvelope aria-hidden="true" />
@@ -105,7 +144,7 @@ function Contact() {
           <div className="contact-map-panel">
             <iframe
               title="Carte de localisation d’Agriconsulting Maroc à Rabat"
-              src="https://maps.google.com/maps?q=33.9981346,-6.8469296&t=&z=17&ie=UTF8&iwloc=&output=embed"
+              src={mapSrc}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -115,8 +154,8 @@ function Contact() {
             />
 
             <div className="map-floating-card">
-              <strong>Agriconsulting Maroc SA</strong>
-              <span>24, Avenue de France, Agdal - Rabat</span>
+              <strong>{contact.companyName}</strong>
+              <span>{contact.addressLine1}, Agdal - Rabat</span>
             </div>
           </div>
         </div>

@@ -114,7 +114,7 @@ function SectorsPage() {
                 width="1200"
                 height="800"
                 decoding="async"
-                fetchPriority="high"
+                fetchpriority="high"
               />
             </div>
             <div className="sectors-page-visual__content">

@@ -6,12 +6,13 @@ import {
   aboutIntro,
   aboutCards,
   aboutAmbition,
-  clienteleLogos,
-  boardMembers,
+  clienteleLogos as defaultClienteleLogos,
+  boardMembers as defaultBoardMembers,
   values,
   teamIntro,
   principles,
 } from "./teamData";
+import { getClientLogos, getTeamMembers } from "../../services/contentApi";
 
 function SplitTitle({ text }) {
   const words = text.split(" ");
@@ -183,6 +184,59 @@ function TeamCard({ member, index }) {
 
 function TeamShowcase() {
   const rootRef = useRef(null);
+  const [boardMembers, setBoardMembers] = useState([]);
+  const [clienteleLogos, setClienteleLogos] = useState([]);
+  const [isTeamLoading, setIsTeamLoading] = useState(true);
+  const [isClientsLoading, setIsClientsLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getTeamMembers()
+      .then((items) => {
+        if (!isMounted) return;
+
+        setBoardMembers(
+          (items.length ? items : defaultBoardMembers).map((item, index) => {
+            const fallback =
+              defaultBoardMembers.find(
+                (member) => String(member.id) === String(item.id)
+              ) || defaultBoardMembers[index] || {};
+
+            return {
+              ...fallback,
+              ...item,
+              image: item.image || fallback.image,
+              quote: item.quote || fallback.quote,
+              imagePosition: fallback.imagePosition,
+              imageScale: fallback.imageScale,
+            };
+          })
+        );
+        setIsTeamLoading(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setBoardMembers(defaultBoardMembers);
+        setIsTeamLoading(false);
+      });
+
+    getClientLogos()
+      .then((items) => {
+        if (!isMounted) return;
+        setClienteleLogos(items.length ? items : defaultClienteleLogos);
+        setIsClientsLoading(false);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setClienteleLogos(defaultClienteleLogos);
+        setIsClientsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -278,7 +332,7 @@ function TeamShowcase() {
         root.removeEventListener("pointermove", handlePageMouseMove);
       }
     };
-  }, []);
+  }, [boardMembers.length]);
 
   return (
     <main className="team-showcase" id="main-content" ref={rootRef}>
@@ -368,9 +422,25 @@ function TeamShowcase() {
         </div>
 
         <div className="team-grid team-grid--bureau" data-panel>
-          {boardMembers.map((member, index) => (
-            <TeamCard key={member.id} member={member} index={index} />
-          ))}
+          {isTeamLoading
+            ? Array.from({ length: defaultBoardMembers.length }, (_, index) => (
+                <article
+                  className="team-card team-card--skeleton"
+                  aria-hidden="true"
+                  key={`team-skeleton-${index}`}
+                >
+                  <div className="team-card__media team-skeleton-block" />
+                  <div className="team-card__body">
+                    <span className="team-skeleton-line team-skeleton-line--name" />
+                    <span className="team-skeleton-line team-skeleton-line--role" />
+                    <span className="team-skeleton-line" />
+                    <span className="team-skeleton-line team-skeleton-line--short" />
+                  </div>
+                </article>
+              ))
+            : boardMembers.map((member, index) => (
+                <TeamCard key={member.id} member={member} index={index} />
+              ))}
         </div>
 
         <div className="team-principles" data-reveal>
@@ -410,23 +480,37 @@ function TeamShowcase() {
           </div>
 
           <div className="clientele-slider" aria-label="Logos de clients et partenaires">
-            <div className="clientele-slider__track">
-              {[...clienteleLogos, ...clienteleLogos].map((logo, index) => (
+            <div
+              className={`clientele-slider__track${
+                isClientsLoading ? " clientele-slider__track--loading" : ""
+              }`}
+            >
+              {(isClientsLoading
+                ? Array.from({ length: 6 }, (_, index) => ({
+                    name: `Chargement ${index + 1}`,
+                    loading: true,
+                  }))
+                : [...clienteleLogos, ...clienteleLogos]
+              ).map((logo, index) => (
                 <article
-                  className={`clientele-logo${logo.wide ? " clientele-logo--wide" : ""}${
+                  className={`clientele-logo${logo.loading ? " clientele-logo--skeleton" : ""}${logo.wide ? " clientele-logo--wide" : ""}${
                     logo.tall ? " clientele-logo--tall" : ""
                   }${logo.size ? ` clientele-logo--${logo.size}` : ""}`}
                   key={`${logo.name}-${index}`}
-                  aria-hidden={index >= clienteleLogos.length ? "true" : undefined}
+                  aria-hidden={logo.loading || index >= clienteleLogos.length ? "true" : undefined}
                 >
-                  <img
-                    src={logo.image}
-                    alt={index < clienteleLogos.length ? logo.name : ""}
-                    width="280"
-                    height="118"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {logo.loading ? (
+                    <span className="clientele-logo__placeholder" />
+                  ) : (
+                    <img
+                      src={logo.image}
+                      alt={index < clienteleLogos.length ? logo.name : ""}
+                      width="280"
+                      height="118"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </article>
               ))}
             </div>

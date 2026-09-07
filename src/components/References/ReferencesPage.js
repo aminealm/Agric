@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { references } from "./Data";
+import { getReferences } from "../../services/contentApi";
 import ReferenceCard from "./ReferenceCard";
 import "./ReferencesPage.css";
 
 function ReferencesPage() {
+  const [referenceItems, setReferenceItems] = useState(references);
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState("all");
   const [country, setCountry] = useState("all");
@@ -11,24 +13,40 @@ function ReferencesPage() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(6);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    getReferences()
+      .then((items) => {
+        if (isMounted) setReferenceItems(items);
+      })
+      .catch(() => {
+        // Keep bundled content visible if the API is temporarily unavailable.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const sectors = useMemo(() => {
     return [
       "all",
-      ...new Set(references.map((item) => item.sector).filter(Boolean)),
+      ...new Set(referenceItems.map((item) => item.sector).filter(Boolean)),
     ];
-  }, []);
+  }, [referenceItems]);
 
   const countries = useMemo(() => {
     return [
       "all",
-      ...new Set(references.map((item) => item.country).filter(Boolean)),
+      ...new Set(referenceItems.map((item) => item.country).filter(Boolean)),
     ];
-  }, []);
+  }, [referenceItems]);
 
   const filteredReferences = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    const result = references.filter((item) => {
+    const result = referenceItems.filter((item) => {
       const title = String(item.title || "").toLowerCase();
       const id = String(item.id || "").toLowerCase();
       const itemSector = String(item.sector || "").toLowerCase();
@@ -73,7 +91,7 @@ function ReferencesPage() {
 
       return yearB - yearA || idB - idA;
     });
-  }, [search, sector, country, sortBy]);
+  }, [referenceItems, search, sector, country, sortBy]);
 
   const visibleReferences = filteredReferences.slice(0, visibleCount);
   const hasMoreReferences = visibleCount < filteredReferences.length;

@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { references } from "./Data";
+import { getReferences } from "../../services/contentApi";
 import ReferenceCard from "./ReferenceCard";
 import "./references.css";
 
 function References() {
-  const landingReferences = references.slice(0, 6);
+  const [landingReferences, setLandingReferences] = useState(
+    references.slice(0, 6)
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollState, setScrollState] = useState({
@@ -19,6 +22,25 @@ function References() {
   );
   const visibleCards = 3;
   const maxIndex = Math.max(landingReferences.length - visibleCards, 0);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getReferences()
+      .then((items) => {
+        if (isMounted) {
+          setLandingReferences(items.slice(0, 6));
+          setCurrentIndex(0);
+        }
+      })
+      .catch(() => {
+        // Keep bundled content visible if the API is temporarily unavailable.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const updateScrollButtons = useCallback(() => {
     const carousel = carouselRef.current;

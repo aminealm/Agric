@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   BsArrowLeft,
@@ -10,6 +11,7 @@ import {
   BsPeople,
 } from "react-icons/bs";
 import { references } from "./Data";
+import { getReference } from "../../services/contentApi";
 import "./ReferenceDetailPage.css";
 
 const detailItems = [
@@ -22,7 +24,47 @@ const detailItems = [
 
 function ReferenceDetailPage() {
   const { id } = useParams();
-  const reference = references.find((item) => String(item.id) === id);
+  const fallbackReference = references.find((item) => String(item.id) === id);
+  const [reference, setReference] = useState(fallbackReference);
+  const [isLoading, setIsLoading] = useState(!fallbackReference);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    setReference(fallbackReference);
+    setIsLoading(!fallbackReference);
+
+    getReference(id)
+      .then((item) => {
+        if (isMounted) setReference(item);
+      })
+      .catch(() => {
+        // The bundled reference remains available when the API is offline.
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [fallbackReference, id]);
+
+  if (isLoading) {
+    return (
+      <main className="reference-detail-page" id="main-content">
+        <section className="reference-detail-hero reference-detail-hero--empty">
+          <div className="reference-detail-container" role="status">
+            <span className="section-eyebrow">Chargement</span>
+            <h1>Préparation de la référence...</h1>
+            <p className="reference-detail-lead">
+              Nous récupérons les informations du projet.
+            </p>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   if (!reference) {
     return (
